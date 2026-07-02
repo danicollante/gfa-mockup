@@ -296,7 +296,7 @@
   /* ---------- Footer ---------- */
   footer{background:#081a37;color:rgba(245,243,239,.7)}
   .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding:clamp(56px,7vw,90px) 0 clamp(40px,5vw,60px)}
-  .foot .brand-lg{font-family:var(--logo-font);font-size:1.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--offwhite);margin-bottom:20px;font-variation-settings:'opsz' var(--opsz),'wght' 600}
+  .foot-mark{height:40px;width:auto;display:block;color:var(--offwhite);margin-bottom:20px}  .foot .tag{font-weight:300;font-size:.95rem;max-width:34ch;color:rgba(245,243,239,.6)}
   .foot .tag{font-weight:300;font-size:.95rem;max-width:34ch;color:rgba(245,243,239,.6)}
   .foot h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500}
   .foot ul{list-style:none}
@@ -633,7 +633,14 @@
 
 <footer><div class="wrap foot">
   <div class="foot-top">
-    <div class="brandcol"><div class="brand-lg">Global Frontier Advisors</div><p class="tag">Strategic advisory for corporates, investors, and institutions operating in the world's most complex markets.</p></div>
+    <div class="brandcol">
+      <svg class="foot-mark" viewBox="0 0 98.17 40.42" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Global Frontier Advisors">
+        <path d="M23.07,20.34c.33.76,3.38,4.69,3.38,8.35v7.64c-1.91.98-3.98,1.69-6.11,1.69-6.55-.11-11.02-7.25-11.02-17.84S13.58,2.4,20.02,2.45c6.05.11,11.34,7.85,12.93,10.14h.44V3c-4.8-1.96-9.82-3-13.64-3C8.62,0,0,8.78,0,20.18s8.45,20.24,18.98,20.24c6.16,0,12.27-2.29,15.65-3.93v-7.8c0-3.65.82-7.58,1.04-8.35v-.16h-12.6v.16Z"/>
+        <path d="M61.64,23.24v-7.36h-.22c-.87.22-5.78,2.67-10.36,2.67h-2.18V2.78h6.93c4.69,0,9.71,6.05,10.58,6.49h.27V.55h-27.38v.22c.16.71,1.42,4.64,1.42,8.29v22.25c0,3.65-1.25,7.58-1.42,8.29v.22h9.6v-19.25h2.18c4.58,0,9.49,2.45,10.36,2.67h.22Z"/>
+        <path d="M93.92,30.86L82.3,0h-9.84v.17c.17.5,1.71,3.71.66,6.58l-7.8,21.68c-1.71,4.87-3.71,9.18-4.87,11.23v.17h7.91v-.28c-.22-.94-2.16-5.92-.55-10.45l1-2.77h14.49l1.66,4.48c1.44,3.82.33,7.96.17,8.79v.22h13.05v-.17c-1.49-2.21-2.82-4.98-4.26-8.79ZM69.69,23.83l6.19-17.31,6.47,17.31h-12.66Z"/>
+      </svg>
+      <p class="tag">Global Frontier Advisors — strategic advisory for corporates, investors, and institutions operating in the world's most complex markets.</p>
+    </div>
     <div><h4>Firm</h4><ul><li><a data-nav="about">About</a></li><li><a data-nav="team">Team</a></li><li><a data-nav="mission">Mission</a></li><li><a data-nav="practice">Practice Areas</a></li></ul></div>
     <div><h4>Connect</h4><ul><li><a data-nav="news">News &amp; Insights</a></li><li><a data-nav="contact">Contact</a></li><li><a href="mailto:info@globalfrontieradvisors.com">info@globalfrontieradvisors.com</a></li><li><a href="#" target="_blank">LinkedIn &#8599;</a></li></ul></div>
   </div>
@@ -642,6 +649,7 @@
     <div class="liftr"><a>Privacy</a><a>Legal</a></div>
   </div>
 </div></footer>
+
 
 <script>
 /* ============ DATA ============ */
