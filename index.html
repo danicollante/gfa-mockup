@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Frontier Advisors</title>
+<meta name="description" content="Global Frontier Advisors — strategic advisory for corporates, investors, and institutions operating in the world's most complex markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d2244;
+    --navy-90:#12294f;
+    --gold:#D4A832;
+    --gray:#8C8C8C;
+    --offwhite:#F5F3EF;
+    --charcoal:#1A1A1A;
+    --white:#ffffff;
+    --line:rgba(13,34,68,.14);
+    --line-light:rgba(245,243,239,.18);
+    --serif:"Bodoni Moda",Georgia,"Times New Roman",serif;
+    --sans:"Work Sans",system-ui,-apple-system,sans-serif;
+    /* --- LOGOTYPE FONT ---
+       Requested: Larken Bold, uppercase — commercial typeface (not on Google Fonts / free CDNs).
+       When the licensed webfont is available, add:
+         @font-face{font-family:"Larken";src:url('fonts/Larken-Bold.woff2') format('woff2');font-weight:700}
+       and change the line below to:  --logo-font:"Larken",var(--serif);  */
+    --logo-font:var(--serif);
+    /* --- BODONI OPTICAL SIZE ---
+       Lower = thicker hairlines / less contrast.  Higher = finer hairlines / more contrast.
+       Range 6–96. 30 is a sturdy-but-elegant middle. Bump to 45–60 for more drama. */
+    --opsz:10;
+    --maxw:1240px;
+    --gut:clamp(20px,5vw,64px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--charcoal);
+    background:var(--offwhite);
+    font-weight:400;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- Typography ---------- */
+  .eyebrow{
+    font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--gold);display:inline-block;
+  }
+  h1,h2,h3,.display,.brand,.brand-lg,.stat .n,.member h3,.pcard h3,.nart h3,.prose p.big,.arena .cap h3{
+    font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em;
+    font-optical-sizing:none;
+    font-variation-settings:'opsz' var(--opsz),'wght' 500;
+  }
+  .display{font-size:clamp(2.6rem,6.2vw,5.1rem);line-height:1.02}
+  h2.section-title{font-size:clamp(1.9rem,3.6vw,3rem);color:var(--navy)}
+  p.lead{font-size:clamp(1.05rem,1.6vw,1.35rem);line-height:1.55;color:var(--charcoal);font-weight:300}
+  .muted{color:var(--gray)}
+
+  /* ---------- Layout helpers ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+  section{padding:clamp(64px,9vw,130px) 0}
+  .hair{height:1px;background:var(--line);border:0;width:100%}
+
+/* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(245,243,239,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);transition:background .3s,border-color .3s;
+  }
+  header.on-hero{background:transparent;border-bottom:1px solid rgba(245,243,239,.14)}
+  .topline{height:2px;background:var(--gold);width:100%}
+  .nav{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);height:74px;display:flex;align-items:center;justify-content:space-between}
+  .brand{
+    font-family:var(--logo-font);
+    font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;
+    font-variation-settings:'opsz' var(--opsz),'wght' 600;font-weight:600;
+  }
+  .brand-logo{height:17px;width:auto;display:block;color:var(--navy)}
+  header.on-hero .brand-logo{color:var(--offwhite)}
+  header.on-hero .brand{color:var(--offwhite)}
+  .navlinks{display:flex;gap:clamp(18px,2.4vw,38px);align-items:center}
+  .navlinks > a, .navlinks .dd > a{font-size:12.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);position:relative;padding:6px 0;transition:color .25s;display:inline-block}
+  header.on-hero .navlinks > a, header.on-hero .navlinks .dd > a{color:rgba(245,243,239,.82)}
+  .navlinks > a::after, .navlinks .dd > a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .3s ease}
+  .navlinks > a:hover::after,.navlinks > a.active::after,.navlinks .dd > a:hover::after,.navlinks .dd > a.active::after{width:100%}
+  .navlinks > a:hover,.navlinks .dd > a:hover{color:var(--gold)}
+  .navlinks > a.active,.navlinks .dd > a.active{color:var(--gold)}
+  /* Practice Areas dropdown */
+  .dd{position:relative}
+  .ddmenu{
+    position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);
+    background:var(--white);border:1px solid var(--line);border-top:2px solid var(--gold);
+    min-width:280px;padding:8px 0;opacity:0;visibility:hidden;transition:.25s ease;
+    box-shadow:0 14px 34px rgba(13,34,68,.14);
+  }
+  .dd:hover .ddmenu,.dd:focus-within .ddmenu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .ddmenu a{display:block;padding:11px 24px;font-size:13px;font-weight:400;letter-spacing:.02em;text-transform:none;color:var(--navy);transition:.2s;white-space:nowrap}
+  .ddmenu a:hover{background:var(--offwhite);color:var(--gold);padding-left:28px}
+
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .menu-btn span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:.3s}
+  header.on-hero .menu-btn span{background:var(--offwhite)}
+
+  /* ---------- Pages ---------- */
+  .page{display:none}
+  .page.active{display:block;animation:fade .5s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---------- Photo placeholders ----------
+     To drop a real image: add  style="--img:url('images/file.jpg')"  to any .photo element.
+     The duotone/B&W treatment applies automatically; remove a class to reduce it. */
+  .photo{position:relative;background:#0d2244 center/cover no-repeat;overflow:hidden;background-image:var(--img,none)}
+  .photo::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:
+      linear-gradient(135deg,rgba(13,34,68,.30),rgba(13,34,68,.90)),
+      repeating-linear-gradient(115deg,rgba(255,255,255,.03) 0 2px,transparent 2px 26px);
+  } 
+  .photo::after{
+    content:attr(data-label);position:absolute;left:16px;bottom:14px;z-index:2;
+    font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(245,243,239,.5);font-weight:500;
+  }
+  .photo.bw{filter:grayscale(1);background-color:#2b2b2b}
+  .photo.bw::before{background:linear-gradient(180deg,rgba(20,20,20,.12),rgba(20,20,20,.72)),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px)}
+  .photo.head::before{background:linear-gradient(180deg,rgba(13,34,68,.10),rgba(13,34,68,.34))}
+
+  /* ---------- Buttons ---------- */
+  .btn{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:15px 30px;border:1px solid var(--navy);color:var(--navy);background:transparent;cursor:pointer;transition:.28s;display:inline-flex;align-items:center;gap:12px}
+  .btn:hover{background:var(--navy);color:var(--offwhite)}
+  .btn.gold{border-color:var(--gold);color:var(--gold)}
+  .btn.gold:hover{background:var(--gold);color:var(--navy)}
+  .btn.solid{background:var(--navy);color:var(--offwhite)}
+  .btn.solid:hover{background:var(--navy-90)}
+  .btn.light{border-color:rgba(245,243,239,.6);color:var(--offwhite)}
+  .btn.light:hover{background:var(--offwhite);color:var(--navy);border-color:var(--offwhite)}
+  .textlink{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);display:inline-flex;align-items:center;gap:9px;border-bottom:1px solid transparent;padding-bottom:3px;transition:.25s;cursor:pointer}
+  .textlink .arw{color:var(--gold);transition:transform .25s}
+  .textlink:hover{border-color:var(--gold)}
+  .textlink:hover .arw{transform:translateX(5px)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    --hero-img:none; /* set to url('images/hero-dc.jpg') to drop a real hero photo */
+    position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--offwhite);
+    background-image:
+      linear-gradient(180deg,rgba(13,34,68,.42) 0%,rgba(13,34,68,.58) 45%,rgba(13,34,68,.92) 100%),
+      var(--hero-img),
+      radial-gradient(120% 90% at 70% 10%,#1c3a6b 0%,#0d2244 60%,#081a37 100%);
+    background-size:cover;background-position:center;
+  }
+  .hero .wrap{width:100%;padding-bottom:clamp(56px,8vh,110px);padding-top:130px}
+  .hero .eyebrow{margin-bottom:26px}
+  .hero h1{max-width:15ch;margin-bottom:28px;color:var(--offwhite)}
+  .hero p{max-width:52ch;font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:300;color:rgba(245,243,239,.82)}
+  .hero-cta{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+  .scrollcue{position:absolute;right:var(--gut);bottom:44px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(245,243,239,.55);writing-mode:vertical-rl;display:flex;align-items:center;gap:14px}
+  .scrollcue::after{content:"";width:1px;height:54px;background:linear-gradient(var(--gold),transparent)}
+
+  /* ---------- Thesis band ---------- */
+  .thesis{background:var(--navy);color:var(--offwhite)}
+  .thesis .eyebrow{margin-bottom:30px}
+  .thesis h2{font-size:clamp(1.9rem,3.8vw,3.3rem);max-width:20ch;color:var(--offwhite);line-height:1.12}
+  .thesis .cols{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(30px,6vw,90px);align-items:end;margin-top:8px}
+  .thesis p{color:rgba(245,243,239,.78);font-weight:300;font-size:1.08rem;max-width:44ch}
+
+  /* ---------- Section head ---------- */
+  .shead{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(38px,5vw,64px);flex-wrap:wrap}
+  .shead .eyebrow{margin-bottom:18px}
+  .shead-left{max-width:44ch}
+  .shead p{margin-top:16px;color:var(--gray);font-weight:300;font-size:1.05rem}
+
+  /* ---------- Practice grid ---------- */
+  .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .pcard{background:var(--offwhite);padding:clamp(30px,3.4vw,50px);cursor:pointer;transition:.3s;position:relative;min-height:230px;display:flex;flex-direction:column}
+  .pcard:hover{background:var(--white)}
+  .pcard .idx{font-family:var(--serif);font-size:13px;color:var(--gold);letter-spacing:.1em}
+  .pcard h3{font-size:clamp(1.35rem,2vw,1.7rem);color:var(--navy);margin:20px 0 14px}
+  .pcard p{color:var(--gray);font-weight:300;font-size:.98rem;flex:1}
+  .pcard .more{margin-top:22px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);opacity:0;transform:translateY(6px);transition:.3s}
+  .pcard:hover .more{opacity:1;transform:none}
+  .pcard .more .arw{color:var(--gold)}
+
+  /* ---------- Arena: single full-bleed image band (DC) ----------
+     Drop the photo:  style="--img:url('images/arena-washington.jpg')"  */
+  .arena{
+  position:relative;padding:0;min-height:78vh;display:flex;align-items:flex-end;color:var(--offwhite);
+  background-image:
+    linear-gradient(90deg,rgba(8,17,37,.85) 0%,rgba(8,17,37,.55) 45%,rgba(8,17,37,.92) 100%),
+    var(--img,none),
+    linear-gradient(135deg,#12294f,#081a37);
+  background-size:cover;background-position:center;background-attachment:fixed;
+  filter:grayscale(.6) contrast(1.1);   /* nuevo: desatura la foto de fondo antes del gradiente */
+}
+  .arena .cap{padding:clamp(40px,7vh,88px) 0}
+  .arena .cap .k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px}
+  .arena .cap h3{font-size:clamp(2rem,4.5vw,3.4rem);color:var(--offwhite);max-width:16ch;margin-bottom:14px}
+  .arena .cap p{font-weight:300;color:rgba(245,243,239,.82);max-width:40ch;font-size:1.05rem}
+  .imgtag{position:absolute;right:16px;bottom:14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.4);font-weight:500}
+
+  /* ---------- Team ---------- */
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,3vw,48px)}
+  .member{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column}
+  .member .photo{aspect-ratio:4/5;width:100%}
+  .member .info{padding:clamp(22px,2.4vw,34px)}
+  .member .role{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .member h3{font-size:clamp(1.35rem,2vw,1.75rem);color:var(--navy);margin-bottom:8px}
+  .member .short{color:var(--gray);font-weight:300;font-size:.98rem;margin-bottom:22px}
+  .member .actions{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .li{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);transition:.25s;background:none;border:0;cursor:pointer}
+  .li:hover{color:var(--gold)}
+  .li svg{width:16px;height:16px;fill:currentColor}
+
+  /* ---------- Bio page ---------- */
+  .backlink{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,243,239,.7);display:inline-block;margin-bottom:26px;transition:.25s}
+  .backlink:hover{color:var(--gold)}
+  .bio-layout{display:grid;grid-template-columns:360px 1fr;gap:clamp(34px,5vw,72px);align-items:start}
+  .bio-photo .photo{aspect-ratio:4/5}
+  .bio-photo .li{margin-top:22px}
+  .bio-body p{font-weight:300;font-size:1.08rem;line-height:1.75;margin-bottom:20px;color:var(--charcoal);max-width:62ch}
+
+  /* ---------- About / Mission ---------- */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,6vw,90px);align-items:center}
+  .two.rev .col-txt{order:2}
+  .prose p{font-weight:300;font-size:1.08rem;line-height:1.7;margin-bottom:22px;max-width:60ch}
+  .prose p.big{font-size:clamp(1.4rem,2.4vw,2rem);line-height:1.3;color:var(--navy);margin-bottom:34px}
+  .figure{aspect-ratio:4/5}
+  .figure.wide{aspect-ratio:5/4}
+
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-block:1px solid var(--line)}
+  .stat{background:var(--offwhite);padding:clamp(26px,3vw,44px) clamp(18px,2vw,30px)}
+  .stat .n{font-size:clamp(2.2rem,4vw,3.2rem);color:var(--navy);line-height:1}
+  .stat .l{margin-top:14px;font-size:12px;letter-spacing:.06em;color:var(--gray);font-weight:300}
+  .stat .n .u{color:var(--gold);font-size:.6em;vertical-align:super}
+
+  /* ---------- Practice detail ---------- */
+  .pa-item{border-top:1px solid var(--line);padding:clamp(34px,4vw,56px) 0;display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,80px);scroll-margin-top:96px}
+  .pa-item:last-child{border-bottom:1px solid var(--line)}
+  .pa-item .num{font-family:var(--serif);font-size:1.1rem;color:var(--gold);padding-top:8px}
+  .pa-item h3{font-size:clamp(1.5rem,2.6vw,2.1rem);color:var(--navy);margin-bottom:18px}
+  .pa-item .d{color:var(--charcoal);font-weight:300;max-width:56ch;margin-bottom:26px;font-size:1.05rem}
+  .caps{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px}
+  .caps li{list-style:none;font-size:.95rem;font-weight:300;color:var(--charcoal);padding-left:18px;position:relative}
+  .caps li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:1px;background:var(--gold)}
+
+  /* ---------- News ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:44px}
+  .filters button{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:9px 18px;border:1px solid var(--line);background:transparent;color:var(--gray);cursor:pointer;transition:.25s}
+  .filters button.active,.filters button:hover{background:var(--navy);color:var(--offwhite);border-color:var(--navy)}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .nart{background:var(--offwhite);display:flex;flex-direction:column;cursor:pointer;transition:.3s}
+  .nart:hover{background:var(--white)}
+  .nart .photo{aspect-ratio:16/10}
+  .nart .nc{padding:26px 26px 30px;display:flex;flex-direction:column;flex:1}
+  .nart .meta{display:flex;gap:14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500}
+  .nart .meta .date{color:var(--gray)}
+  .nart h3{font-size:1.2rem;color:var(--navy);line-height:1.25;margin-bottom:14px}
+  .nart p{font-size:.92rem;color:var(--gray);font-weight:300;flex:1;margin-bottom:18px}
+  .nart .src{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:500}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,110px)}
+  .field{margin-bottom:26px}
+  .field label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:10px;font-weight:500}
+  .field input,.field textarea{width:100%;font-family:var(--sans);font-size:1rem;font-weight:300;color:var(--charcoal);background:transparent;border:0;border-bottom:1px solid var(--line);padding:10px 0;transition:.25s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+  .field textarea{resize:vertical;min-height:110px}
+  .cinfo .block{margin-bottom:34px}
+  .cinfo .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500}
+  .cinfo .v{font-weight:300;font-size:1.05rem;color:var(--charcoal);line-height:1.7}
+  .cinfo .v a:hover{color:var(--gold)}
+
+  .page-hero{padding:150px 0 clamp(40px,6vw,80px);background:var(--navy);color:var(--offwhite)}
+  .page-hero .eyebrow{margin-bottom:22px}
+  .page-hero h1{font-size:clamp(2.3rem,5vw,4rem);color:var(--offwhite);max-width:18ch}
+  .page-hero p{margin-top:24px;max-width:56ch;font-weight:300;color:rgba(245,243,239,.8);font-size:1.15rem}
+
+  .ctastrip{background:var(--navy);color:var(--offwhite);text-align:center}
+  .ctastrip h2{font-size:clamp(1.8rem,3.6vw,3rem);color:var(--offwhite);max-width:24ch;margin:0 auto 34px}
+  .ctastrip .eyebrow{margin-bottom:24px}
+
+  /* ---------- Footer ---------- */
+  footer{background:#081a37;color:rgba(245,243,239,.7)}
+  .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding:clamp(56px,7vw,90px) 0 clamp(40px,5vw,60px)}
+  .foot .brand-lg{font-family:var(--logo-font);font-size:1.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--offwhite);margin-bottom:20px;font-variation-settings:'opsz' var(--opsz),'wght' 600}
+  .foot .tag{font-weight:300;font-size:.95rem;max-width:34ch;color:rgba(245,243,239,.6)}
+  .foot h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500}
+  .foot ul{list-style:none}
+  .foot ul li{margin-bottom:12px}
+  .foot ul li a{font-size:.92rem;font-weight:300;color:rgba(245,243,239,.72);transition:.25s;cursor:pointer}
+  .foot ul li a:hover{color:var(--gold)}
+  .foot-bot{border-top:1px solid var(--line-light);padding:26px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .foot-bot span{font-size:.8rem;color:rgba(245,243,239,.45);font-weight:300;letter-spacing:.03em}
+  .foot-bot .liftr{display:flex;gap:18px}
+  .foot-bot .liftr a{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.6);cursor:pointer}
+  .foot-bot .liftr a:hover{color:var(--gold)}
+
+  /* ---------- Mobile nav ---------- */
+  .mobnav{position:fixed;inset:0;z-index:150;background:var(--navy);display:none;flex-direction:column;justify-content:center;padding:0 var(--gut)}
+  .mobnav.open{display:flex;animation:fade .3s}
+  .mobnav a{font-family:var(--serif);font-size:2rem;color:var(--offwhite);padding:14px 0;border-bottom:1px solid var(--line-light);font-variation-settings:'opsz' var(--opsz),'wght' 500}
+  .mobnav a:last-child{border:0}
+  .mobnav a.active{color:var(--gold)}
+  .mobnav .x{position:absolute;top:24px;right:var(--gut);background:none;border:0;color:var(--offwhite);font-size:34px;cursor:pointer}
+
+  @media(max-width:900px){
+    .navlinks{display:none}.menu-btn{display:block}
+    .thesis .cols{grid-template-columns:1fr;gap:28px}
+    .pgrid{grid-template-columns:1fr}
+    .arena{min-height:58vh;background-attachment:scroll}
+    .team-grid{grid-template-columns:1fr}
+    .two{grid-template-columns:1fr;gap:36px}.two.rev .col-txt{order:0}
+    .figure,.figure.wide{aspect-ratio:4/3}
+    .stat-row{grid-template-columns:1fr 1fr}
+    .caps{grid-template-columns:1fr}
+    .pa-item{grid-template-columns:1fr;gap:14px}.pa-item .num{padding-top:0}
+    .news-grid{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .bio-layout{grid-template-columns:1fr;gap:30px}.bio-photo .photo{aspect-ratio:4/3}
+    .foot-top{grid-template-columns:1fr 1fr}.foot .brandcol{grid-column:1/-1}
+  }
+  @media(max-width:560px){
+    .stat-row{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr}
+    .hero-cta{flex-direction:column;align-items:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header id="hdr" class="on-hero">
+  <div class="topline"></div>
+  <nav class="nav">
+    <a class="brand" data-nav="home">
+      <svg class="brand-logo" viewBox="0 0 533.54 28" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+        <path d="M0,13.96C0,6.08,5.96,0,13.66,0,16.3,0,19.77.72,23.09,2.08v6.64h-.3c-1.09-1.58-4.75-6.94-8.94-7.02-4.45-.04-7.4,4.98-7.4,12.26s3.09,12.26,7.62,12.34c1.47,0,2.91-.49,4.23-1.17v-5.28c0-2.53-2.11-5.25-2.34-5.77v-.11h8.72v.11c-.15.53-.72,3.25-.72,5.77v5.4c-2.34,1.13-6.57,2.72-10.83,2.72C5.85,27.96,0,22.23,0,13.96Z"/>
+        <path d="M34.19,6.26v19.74h4.34c3.21,0,6.68-5.06,7.32-5.43h.15v6.98h-18.45v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h7.58v.15c-.08.49-.94,3.21-.94,5.74Z"/>
+        <path d="M47.32,13.89C47.32,5.62,53.02,0,60.19,0s12.91,5.62,12.91,13.89-5.77,14.08-12.91,14.08-12.87-5.77-12.87-14.08ZM66.76,13.85c0-5.51-2.23-12.3-6.57-12.3s-6.53,6.91-6.53,12.42,2.19,12.45,6.53,12.45,6.57-6.98,6.57-12.57Z"/>
+        <path d="M75.78.38h12.23c5.06,0,8.57,3.09,8.57,7.02,0,3.43-2.6,5.28-5.43,6.23,3.4.83,6.72,2.75,6.72,6.83,0,4.72-4.41,7.09-9.47,7.09h-12.6v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15ZM90.64,7.4c0-2.57-1.47-5.4-4.57-5.4h-3.66v10.98h3.55c3.09,0,4.68-2.83,4.68-5.58ZM91.97,20.42c0-3.36-1.89-5.85-5.51-5.85h-4.04v11.36h4.04c3.77,0,5.51-2.04,5.51-5.51Z"/>
+        <path d="M101.97,19.77l5.32-14.79c.72-1.96-.34-4.15-.45-4.49v-.11h6.72l7.92,21.06c.98,2.6,1.89,4.49,2.91,6v.11h-8.91v-.15c.11-.57.87-3.4-.11-6l-1.13-3.06h-9.89l-.68,1.89c-1.09,3.09.23,6.49.38,7.13v.19h-5.4v-.11c.79-1.4,2.15-4.34,3.32-7.66ZM113.59,16.64l-4.41-11.81-4.23,11.81h8.64Z"/>
+        <path d="M133.1,6.26v19.74h4.34c3.21,0,6.68-5.06,7.32-5.43h.15v6.98h-18.45v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h7.58v.15c-.07.49-.94,3.21-.94,5.74Z"/>
+        <path d="M162.13,1.92v10.91h1.51c3.17,0,6.57-1.7,7.17-1.85h.15v5.09h-.15c-.6-.15-4-1.85-7.17-1.85h-1.51v13.32h-6.64v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h18.94v6.04h-.19c-.6-.3-4.08-4.49-7.32-4.49h-4.79Z"/>
+        <path d="M190.66,20.57c-1.47-3.51-3.51-5.21-5.25-5.58h-1.74v6.68c0,2.53.87,5.25.94,5.74v.15h-7.58v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h12.23c5.32,0,8.91,2.83,8.91,7.06s-3.21,6.57-7.74,7.02c2.3.53,4.15,1.85,5.43,4.11,2.15,3.92,2.91,6.6,5.28,8.83v.15h-6.79c-1.06-.98-2.57-4.34-3.7-6.98ZM183.68,1.77v11.7h3.55c3.13,0,4.87-1.96,4.87-5.74s-1.62-5.96-4.76-5.96h-3.66ZM184.51,14.94c-.11,0-.23,0-.34.04.11,0,.23-.04.34-.04Z"/>
+        <path d="M200.66,13.89C200.66,5.62,206.36,0,213.53,0s12.91,5.62,12.91,13.89-5.77,14.08-12.91,14.08-12.87-5.77-12.87-14.08ZM220.09,13.85c0-5.51-2.23-12.3-6.57-12.3s-6.53,6.91-6.53,12.42,2.19,12.45,6.53,12.45,6.57-6.98,6.57-12.57Z"/>
+        <path d="M232.36,5.25v13.77c0,3.66,1.74,7.62,1.92,8.34v.19h-5.55v-.19c.19-.72,1.89-4.68,1.89-8.34V6.75c0-2.72-1.32-5.59-1.47-6.23v-.15h6.83l13.47,19.89v-11.36c0-3.7-1.7-7.62-1.89-8.34v-.19h5.55v.19c-.19.72-1.92,4.64-1.92,8.34v18.64h-3.59l-15.24-22.3Z"/>
+        <path d="M255.42.38h23.55v7.47h-.19c-.57-.41-4-5.81-7.17-5.81h-1.58v19.62c0,2.53.87,5.25.98,5.74v.15h-7.62v-.15c.11-.49.98-3.21.98-5.74V2.04h-1.62c-3.13,0-6.57,5.4-7.17,5.81h-.15V.38Z"/>
+        <path d="M289.15,27.55h-7.58v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h7.58v.15c-.08.49-.94,3.21-.94,5.74v15.4c0,2.53.87,5.25.94,5.74v.15Z"/>
+        <path d="M299.49,14.3v11.7h5.36c3.21,0,6.68-4.57,7.32-4.87h.15v6.42h-19.47v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h19.36v6.42h-.15c-.64-.3-4.11-4.87-7.32-4.87h-5.24v11.02h2.26c3.17,0,6.6-1.7,7.17-1.85h.19v5.06h-.19c-.57-.15-4-1.85-7.17-1.85h-2.26Z"/>
+        <path d="M329.08,20.57c-1.47-3.51-3.51-5.21-5.24-5.58h-1.74v6.68c0,2.53.87,5.25.94,5.74v.15h-7.58v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h12.23c5.32,0,8.91,2.83,8.91,7.06s-3.21,6.57-7.74,7.02c2.3.53,4.15,1.85,5.43,4.11,2.15,3.92,2.91,6.6,5.28,8.83v.15h-6.79c-1.06-.98-2.57-4.34-3.7-6.98ZM322.1,1.77v11.7h3.55c3.13,0,4.87-1.96,4.87-5.74s-1.62-5.96-4.75-5.96h-3.66ZM322.93,14.94c-.11,0-.23,0-.34.04.11,0,.23-.04.34-.04Z"/>
+        <path d="M349.6,19.77l5.32-14.79c.72-1.96-.34-4.15-.45-4.49v-.11h6.72l7.92,21.06c.98,2.6,1.89,4.49,2.91,6v.11h-8.91v-.15c.11-.57.87-3.4-.11-6l-1.13-3.06h-9.89l-.68,1.89c-1.09,3.09.23,6.49.38,7.13v.19h-5.4v-.11c.79-1.4,2.15-4.34,3.32-7.66ZM361.23,16.64l-4.41-11.81-4.23,11.81h8.64Z"/>
+        <path d="M374.1.38h10.57c7.09,0,13.02,5.36,13.02,13.47s-5.92,13.7-13.02,13.7h-10.57v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15ZM380.74,1.89v24.11h2.3c5.7,0,8.3-5.7,8.3-12.15-.04-6.19-2.6-11.96-8.3-11.96h-2.3Z"/>
+        <path d="M397.38.57v-.19h9.06v.15c-.11.57-.94,3.4.04,6l6.38,16.91,5.55-15.74c1.09-3.09,0-6.49-.15-7.13v-.19h5.21v.15c-.26.49-2.23,4.3-3.43,7.62l-6.87,19.4h-4.79l-8.04-21.06c-.98-2.6-2.64-5.4-2.94-5.92Z"/>
+        <path d="M433.34,27.55h-7.58v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h7.58v.15c-.08.49-.94,3.21-.94,5.74v15.4c0,2.53.87,5.25.94,5.74v.15Z"/>
+        <path d="M437,25.58v-6.19h.26c2.72,2.79,6.38,6.87,10.34,6.87,2.42,0,4.49-1.43,4.49-4.04,0-3.17-3.17-4.64-7.32-6.15-4.68-1.66-8.15-3.96-8.15-8.04s3.55-8.04,10.15-8.04c3.51,0,7.06,1.21,9.32,2.15v6h-.19c-2.53-2.49-6.34-6.45-9.93-6.45-2.68,0-4.3,1.7-4.3,3.58,0,2.79,3.58,4.19,7.81,5.81,6.08,2.45,7.74,5.74,7.74,8.79,0,5.51-4.91,8.11-10.19,8.11-2.83,0-6.34-.87-10.04-2.42Z"/>
+        <path d="M459.38,13.89c0-8.26,5.7-13.89,12.87-13.89s12.91,5.62,12.91,13.89-5.77,14.08-12.91,14.08-12.87-5.77-12.87-14.08ZM478.82,13.85c0-5.51-2.23-12.3-6.57-12.3s-6.53,6.91-6.53,12.42,2.19,12.45,6.53,12.45,6.57-6.98,6.57-12.57Z"/>
+        <path d="M501.46,20.57c-1.47-3.51-3.51-5.21-5.24-5.58h-1.74v6.68c0,2.53.87,5.25.94,5.74v.15h-7.58v-.15c.11-.49.98-3.21.98-5.74V6.26c0-2.53-.87-5.25-.98-5.74v-.15h12.23c5.32,0,8.91,2.83,8.91,7.06s-3.21,6.57-7.74,7.02c2.3.53,4.15,1.85,5.43,4.11,2.15,3.92,2.91,6.6,5.28,8.83v.15h-6.79c-1.06-.98-2.57-4.34-3.7-6.98ZM494.48,1.77v11.7h3.55c3.13,0,4.87-1.96,4.87-5.74s-1.62-5.96-4.75-5.96h-3.66ZM495.31,14.94c-.11,0-.23,0-.34.04.11,0,.23-.04.34-.04Z"/>
+        <path d="M513.31,25.58v-6.19h.26c2.72,2.79,6.38,6.87,10.34,6.87,2.42,0,4.49-1.43,4.49-4.04,0-3.17-3.17-4.64-7.32-6.15-4.68-1.66-8.15-3.96-8.15-8.04s3.55-8.04,10.15-8.04c3.51,0,7.06,1.21,9.32,2.15v6h-.19c-2.53-2.49-6.34-6.45-9.93-6.45-2.68,0-4.3,1.7-4.3,3.58,0,2.79,3.58,4.19,7.81,5.81,6.08,2.45,7.74,5.74,7.74,8.79,0,5.51-4.91,8.11-10.19,8.11-2.83,0-6.34-.87-10.04-2.42Z"/>
+      </svg>
+    </a>
+    <div class="navlinks">
+      <a data-nav="about">About</a>
+      <a data-nav="team">Team</a>
+      <div class="dd">
+        <a data-nav="practice">Practice Areas</a>
+        <div class="ddmenu" id="ddPractice"></div>
+      </div>
+      <a data-nav="mission">Mission</a>
+      <a data-nav="news">News</a>
+      <a data-nav="contact">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<div class="mobnav" id="mobnav">
+  <button class="x" id="mobX" aria-label="Close menu">&times;</button>
+  <a data-nav="home">Home</a>
+  <a data-nav="about">About</a>
+  <a data-nav="team">Team</a>
+  <a data-nav="practice">Practice Areas</a>
+  <a data-nav="mission">Mission</a>
+  <a data-nav="news">News</a>
+  <a data-nav="contact">Contact</a>
+</div>
+
+<main id="main">
+
+<!-- ===================== HOME ===================== -->
+<div class="page active" id="page-home">
+  <section class="hero" style="--hero-img:url('https://lh3.googleusercontent.com/d/17TrPTnT9vV8HCeEoHtYPILBmXabOuzeO')">
+      <div class="wrap">
+      <span class="eyebrow">Global Strategic Advisory</span>
+      <h1 class="display">Strategic counsel for the world's most complex markets.</h1>
+      <p>Global Frontier Advisors serves corporates, investors, and institutions on their most consequential objectives — where commercial ambition meets political complexity.</p>
+      <div class="hero-cta">
+        <a class="btn light" data-nav="about">About the firm <span>&rarr;</span></a>
+        <a class="btn gold" data-nav="contact">Contact the firm</a>
+      </div>
+    </div>
+    <div class="scrollcue">Scroll</div>
+  </section>
+
+  <section class="thesis">
+    <div class="wrap">
+      <span class="eyebrow">The firm</span>
+      <div class="cols">
+        <h2>Experience in government. Standing in the market.</h2>
+        <p>The firm's four principals bring decades of service across the U.S. military, the diplomatic corps, and frontier markets — and the relationships that only such careers confer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-left"><span class="eyebrow">Practice areas</span><h2 class="section-title">Four practices. One partnership.</h2></div>
+        <a class="textlink" data-nav="practice">View all practice areas <span class="arw">&rarr;</span></a>
+      </div>
+      <div class="pgrid" id="homePractice"></div>
+    </div>
+  </section>
+
+  <!-- Single full-bleed image band. Washington imagery as atmosphere (Pallas-style).
+       Additional presence cities are listed discreetly on the Contact page — pending RM. -->
+  <section class="arena" style="--img:url(https://lh3.googleusercontent.com/d/1cQSverDK8vgSPjMMG04yMF0zmAjUAuRQ)">
+    <div class="wrap"><div class="cap">
+      <span class="k">The Firm</span>
+      <h3>Headquartered in Washington.</h3>
+      <p>At the center of policy, defense, and diplomacy — the firm's home ground.</p>
+    </div></div>
+    <span class="imgtag">images/arena-washington.jpg &middot; 2400&times;1400</span>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-left"><span class="eyebrow">The partnership</span><h2 class="section-title">Senior leadership, drawn from public service and the private sector.</h2></div>
+        <a class="textlink" data-nav="team">Meet the partners <span class="arw">&rarr;</span></a>
+      </div>
+      <div class="team-grid" id="homeTeam"></div>
+    </div>
+  </section>
+
+  <section style="background:var(--white)">
+    <div class="wrap">
+      <div class="shead">
+        <div class="shead-left"><span class="eyebrow">News &amp; Insights</span><h2 class="section-title">Commentary and public engagement.</h2></div>
+        <a class="textlink" data-nav="news">View all <span class="arw">&rarr;</span></a>
+      </div>
+      <div class="news-grid" id="homeNews"></div>
+    </div>
+  </section>
+
+  <section class="ctastrip">
+    <div class="wrap">
+      <span class="eyebrow">Engagement</span>
+      <h2>The firm welcomes inquiries regarding long-term advisory relationships.</h2>
+      <a class="btn gold" data-nav="contact">Contact the firm</a>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<div class="page" id="page-about">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">About the firm</span>
+    <h1>An advisory partnership built on judgment and standing.</h1>
+    <p>Global Frontier Advisors advises corporates, investors, and institutions on their most consequential objectives in frontier and emerging markets.</p>
+  </div></section>
+  <section><div class="wrap"><div class="two">
+    <div class="col-txt prose">
+      <p class="big">In the world's most complex jurisdictions, outcomes are determined by judgment, relationships, and standing — assets that cannot be acquired quickly.</p>
+      <p>The firm was founded by four principals whose careers span the U.S. military, the diplomatic corps, the interagency, and two decades of operating in frontier markets. That experience affords the firm something research alone cannot: the ability to make the introduction, place the call, and open the door.</p>
+      <p>Global Frontier Advisors serves its clients on a retainer basis, as a long-term strategic partner. Its clients are corporates, investors, and institutions who require the confidence to operate in the markets others avoid.</p>
+    </div>
+    <div class="photo figure" style="--img:url('https://lh3.googleusercontent.com/d/1O6pc6qUYFhw0C3ayvww8wtIKAVIbTyD-')"></div>
+  </div></div></section>
+  <section style="background:var(--white);padding-top:40px;padding-bottom:40px"><div class="wrap"><div class="stat-row">
+    <div class="stat"><div class="n">4</div><div class="l">Managing partners</div></div>
+    <div class="stat"><div class="n">35<span class="u">yr</span></div><div class="l">Marine Corps command experience</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Continents of operating history</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Network built over decades of service</div></div>
+  </div></div></section>
+  <section style="background:var(--white);padding-top:40px"><div class="wrap"><div class="two rev">
+    <div class="col-fig"><div class="photo figure wide" style="background-image:url('https://lh3.googleusercontent.com/d/15oZSKIIngFmoAGHAsQGTnS1vmkaUmHke')"></div></div>
+    <div class="col-txt prose">
+      <span class="eyebrow">How we work</span>
+      <h2 class="section-title" style="margin:18px 0 26px">Discretion and judgment.</h2>
+      <p>Much of the firm's work is, by its nature, confidential. Discretion is not a courtesy extended to clients — it is a condition of the work itself.</p>
+      <p>Each engagement draws on the full partnership. A client does not retain one relationship; they gain access to a network built across decades of service in government, defense, diplomacy, and institutional capital.</p>
+      <a class="textlink" data-nav="practice" style="margin-top:8px">View practice areas <span class="arw">&rarr;</span></a>
+    </div>
+  </div></div></section>
+  <section class="ctastrip"><div class="wrap">
+    <span class="eyebrow">The partnership</span><h2>The partners behind the firm.</h2>
+    <a class="btn gold" data-nav="team">Meet the partners</a>
+  </div></section>
+</div>
+
+<!-- ===================== TEAM ===================== -->
+<div class="page" id="page-team">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">The partnership</span>
+    <h1>A partnership of four principals.</h1>
+    <p>Global Frontier Advisors is led by partners drawn from the most senior levels of U.S. military, diplomatic, and commercial leadership.</p>
+  </div></section>
+  <section><div class="wrap"><div class="team-grid" id="fullTeam"></div></div></section>
+  <section class="ctastrip"><div class="wrap">
+    <span class="eyebrow">Engagement</span><h2>To discuss an engagement, contact the firm.</h2>
+    <a class="btn gold" data-nav="contact">Contact the firm</a>
+  </div></section>
+</div>
+
+<!-- ===================== BIO (dedicated per-partner page) ===================== -->
+<div class="page" id="page-bio">
+  <section class="page-hero"><div class="wrap">
+    <a class="backlink" data-nav="team">&larr; The partnership</a>
+    <span class="eyebrow" id="bRole"></span>
+    <h1 id="bName"></h1>
+  </div></section>
+  <section><div class="wrap"><div class="bio-layout">
+    <div class="bio-photo">
+      <div class="photo head" id="bPhoto" data-label=""></div>
+      <a class="li" id="bLi" href="#" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4V21H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.06 3.76-2.06C20.4 8.56 21 10.5 21 13.2V21h-4v-6.9c0-1.64-.03-3.75-2.29-3.75-2.3 0-2.65 1.79-2.65 3.63V21H9z"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+    <div class="bio-body" id="bBody"></div>
+  </div></div></section>
+  <section class="ctastrip"><div class="wrap">
+    <span class="eyebrow">Engagement</span><h2>To discuss an engagement, contact the firm.</h2>
+    <a class="btn gold" data-nav="contact">Contact the firm</a>
+  </div></section>
+</div>
+
+<!-- ===================== PRACTICE ===================== -->
+<div class="page" id="page-practice">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">Practice areas</span>
+    <h1>Advisory services across four practice areas.</h1>
+    <p>Each practice draws on the same foundation: the partnership's relationships across government, defense, diplomacy, and institutional capital.</p>
+  </div></section>
+  <section><div class="wrap" id="practiceDetail"></div></section>
+  <section class="ctastrip"><div class="wrap">
+    <span class="eyebrow">Engagement</span><h2>Discuss how the firm can support your objectives.</h2>
+    <a class="btn gold" data-nav="contact">Contact the firm</a>
+  </div></section>
+</div>
+
+<!-- ===================== MISSION ===================== -->
+<div class="page" id="page-mission">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">Our mission</span>
+    <h1>Advancing national interest through private enterprise.</h1>
+    <p>The firm was built by leaders who spent their careers in service to the United States — and who never stopped believing in the strategic value of American engagement abroad.</p>
+  </div></section>
+  <section><div class="wrap"><div class="two">
+    <div class="col-txt prose">
+      <p class="big">We believe responsibly-led private enterprise is one of the most effective instruments of national strategy.</p>
+      <p>Our principals served in uniform, in embassies, and across the interagency. That perspective shapes how we work today. We help American and allied enterprises compete and operate in strategically significant regions — aligning commercial objectives with the broader interest in stable, secure, and open markets.</p>
+      <p>Where capital, security, and diplomacy intersect, we help our clients move with confidence and credibility. Success in a frontier market is rarely only a commercial outcome; done well, it strengthens the relationships and supply chains that matter far beyond a single transaction.</p>
+    </div>
+    <div class="col-fig"><div class="photo figure" style="--img:url('https://lh3.googleusercontent.com/d/1uiezEaG-v6A8PeK1F7e-0bIgUUOjbDZ0')" data-label="Washington Monument & flags — 1600&times;2000"></div></div>
+  </div></div></section>
+  <section style="background:var(--navy);color:var(--offwhite)"><div class="wrap">
+    <span class="eyebrow">What guides us</span>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-light);border:1px solid var(--line-light);margin-top:38px">
+      <div style="background:var(--navy);padding:clamp(28px,3vw,44px)"><h3 style="color:var(--offwhite);font-size:1.4rem;margin-bottom:14px">Service</h3><p style="color:rgba(245,243,239,.72);font-weight:300;font-size:.98rem">A career habit that does not retire. We approach every engagement with the discipline of the institutions that trained us.</p></div>
+      <div style="background:var(--navy);padding:clamp(28px,3vw,44px)"><h3 style="color:var(--offwhite);font-size:1.4rem;margin-bottom:14px">Standing</h3><p style="color:rgba(245,243,239,.72);font-weight:300;font-size:.98rem">Trust earned over decades cannot be assembled on demand. It is the firm's core asset and its highest obligation.</p></div>
+      <div style="background:var(--navy);padding:clamp(28px,3vw,44px)"><h3 style="color:var(--offwhite);font-size:1.4rem;margin-bottom:14px">Alignment</h3><p style="color:rgba(245,243,239,.72);font-weight:300;font-size:.98rem">We take on partnerships where commercial success and national strategic interest point in the same direction.</p></div>
+    </div>
+  </div></section>
+  <section class="ctastrip"><div class="wrap">
+    <span class="eyebrow">Partner with us</span><h2>Strategy in service of your objectives — and the broader interest.</h2>
+    <a class="btn gold" data-nav="contact">Contact the firm</a>
+  </div></section>
+</div>
+
+<!-- ===================== NEWS ===================== -->
+<div class="page" id="page-news">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">News &amp; Insights</span>
+    <h1>Commentary and public engagement.</h1>
+    <p>Media appearances, remarks, and perspectives from the principals of Global Frontier Advisors.</p>
+  </div></section>
+  <section><div class="wrap">
+    <div class="filters" id="newsFilters"></div>
+    <div class="news-grid" id="fullNews"></div>
+  </div></section>
+</div>
+
+<!-- ===================== CONTACT ===================== -->
+<div class="page" id="page-contact">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h1>Contact the firm.</h1>
+    <p>Global Frontier Advisors accepts a limited number of long-term advisory engagements. We welcome your inquiry.</p>
+  </div></section>
+  <section><div class="wrap"><div class="contact-grid">
+    <div>
+      <div class="field"><label>Name</label><input type="text" placeholder="Full name"></div>
+      <div class="field"><label>Organization</label><input type="text" placeholder="Company or institution"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+      <div class="field"><label>How can we help?</label><textarea placeholder="Briefly describe your objective or inquiry"></textarea></div>
+      <button class="btn solid" type="button" onclick="alert('Mockup only — form not connected. To be wired by the developer on build.')">Send message</button>
+    </div>
+    <div class="cinfo">
+      <div class="block"><div class="k">Office</div><div class="v">1717 Pennsylvania Avenue NW, Suite 675<br>Washington, DC 20006</div></div>
+      <div class="block"><div class="k">Presence</div><div class="v">Washington, DC &middot; [additional cities — copy pending, RM]</div></div>
+      <div class="block"><div class="k">General enquiries</div><div class="v"><a href="mailto:info@globalfrontieradvisors.com">info@globalfrontieradvisors.com</a></div></div>
+      <div class="block"><div class="k">Follow</div><div class="v"><a href="#" target="_blank">LinkedIn &#8599;</a></div></div>
+    </div>
+  </div></div></section>
+</div>
+
+</main>
+
+<footer><div class="wrap foot">
+  <div class="foot-top">
+    <div class="brandcol"><div class="brand-lg">Global Frontier Advisors</div><p class="tag">Strategic advisory for corporates, investors, and institutions operating in the world's most complex markets.</p></div>
+    <div><h4>Firm</h4><ul><li><a data-nav="about">About</a></li><li><a data-nav="team">Team</a></li><li><a data-nav="mission">Mission</a></li><li><a data-nav="practice">Practice Areas</a></li></ul></div>
+    <div><h4>Connect</h4><ul><li><a data-nav="news">News &amp; Insights</a></li><li><a data-nav="contact">Contact</a></li><li><a href="mailto:info@globalfrontieradvisors.com">info@globalfrontieradvisors.com</a></li><li><a href="#" target="_blank">LinkedIn &#8599;</a></li></ul></div>
+  </div>
+  <div class="foot-bot">
+    <span>&copy; 2026 Global Frontier Advisors L.P. All rights reserved.</span>
+    <div class="liftr"><a>Privacy</a><a>Legal</a></div>
+  </div>
+</div></footer>
+
+<script>
+/* ============ DATA ============ */
+const PRACTICES=[
+  {n:"01",slug:"market-entry",t:"Market Entry & Strategy",s:"End-to-end support from asset identification to operational launch in strategically important regions.",caps:["Asset identification & evaluation","Local partnership development","Regulatory & licensing support","Infrastructure & logistics strategy","Operational readiness & risk mitigation","Community engagement & workforce planning"]},
+  {n:"02",slug:"government-affairs",t:"Government & Public Affairs",s:"Navigation of complex governmental and public affairs in geopolitically significant regions.",caps:["Government liaison & stakeholder engagement","Regulatory compliance & policy alignment","ESG strategy development","Permit & licensing advocacy","Crisis management & communications","Reputational risk strategy"]},
+  {n:"03",slug:"policy-risk",t:"Political & Policy Risk Analysis",s:"Comprehensive risk assessment and mitigation for operations in volatile environments.",caps:["Geopolitical risk assessment","Regulatory & policy monitoring","Scenario planning & contingency strategy","Security & operational risk evaluation","Sustainability & ESG risk","Sector-specific legislative tracking"]},
+  {n:"04",slug:"capital-markets",t:"Capital Markets & Due Diligence",s:"Capital markets solutions anchored in an extensive institutional investor network.",caps:["Capital raising & investor access","Joint ventures & partnership development","Investment readiness & positioning","Financial & valuation analysis","Sovereign wealth & PE introductions","Fair market value assessment"]}
+];
+const TEAM=[
+  {slug:"michael-groen",name:"Lt. Gen. Michael Groen",suffix:"USMC (Ret.)",role:"Managing Partner",short:"Former Director of the DoD's Joint Artificial Intelligence Center and senior AI executive across defense.",photo:"https://lh3.googleusercontent.com/d/1SPuCeHhI3zIdQ4XYVCiQVTL2q8GsXCi3",li:"#",bio:["Lt. General Michael Groen (USMC, Ret.) served as Director of the Department of Defense's Joint Artificial Intelligence Center (JAIC), the senior executive responsible for artificial intelligence across the DoD.","A multi-tour combat veteran with deep expertise in intelligence and cyber operations, he held senior positions at the National Security Agency and served as Director of Joint Staff Intelligence.","At the firm, he is the primary bridge to the artificial intelligence and technology sector, and to defense and national-security relationships across government."]},
+  {slug:"james-story",name:"Ambassador James Story",suffix:"(Ret.)",role:"Managing Partner",short:"Retired Senior Foreign Service Officer and former U.S. Ambassador to Venezuela.",photo:"https://lh3.googleusercontent.com/d/1ot_DUF48iuCkiXY_1Y3abh5sCoWaYGO7",li:"#",bio:["Ambassador James \"Jimmy\" Story (Ret.) is a retired Senior Foreign Service Officer and former U.S. Ambassador to Venezuela, and Chargé d'Affaires to Angola and São Tomé and Príncipe.","He held key roles across Latin America, Africa, and the Caribbean, including Director of INL for the Western Hemisphere.","A recognized voice on hemispheric affairs, he is an active commentator, speaker, and columnist, and serves as a primary external face of the firm."]},
+  {slug:"david-bellon",name:"Lt. Gen. David Bellon",suffix:"USMC (Ret.)",role:"Managing Partner",short:"35-year Marine Corps veteran with extensive leadership across Latin America and the Middle East.",photo:"https://lh3.googleusercontent.com/d/1mlLqyF_MQbjMLZmoEQWtDcF5FjwGHUtM",li:"#",bio:["Lt. General David Bellon (USMC, Ret.) is a 35-year Marine Corps veteran with extensive leadership experience across Latin America and the Middle East, including command of the Marine Corps Reserve and Marine Corps Southern Division.","He has testified before Congress on security and infrastructure matters.","He brings deep access to the Department of Defense, the Department of Energy, and interagency relationships across the U.S. government."]},
+  {slug:"david-kol",name:"David Kol",suffix:"",role:"Managing Partner",short:"International business executive with 20+ years in frontier and emerging markets, including West Africa.",photo:"https://lh3.googleusercontent.com/d/1ZBT94ZWUQdeIKvqtZUZn6vRtlPKql4eX",li:"#",bio:["David Kol is a seasoned international business and startup executive with more than two decades of experience in frontier and emerging markets, including over fifteen years across West Africa.","He has led initiatives spanning finance, mergers and acquisitions, business development, and executive leadership across the resource, media, real estate, and technology sectors.","He is the firm's primary commercial and operational partner, with particular depth across West Africa, including Guinea and Liberia."]}
+];
+const NEWS=[
+  {cat:"Media",date:"MS NOW",src:"Broadcast Media",img:"https://lh3.googleusercontent.com/d/1vJCghb94TWx5AxjOqw_TvoDwpG61pRgj",t:"Opinion | The U.S. drone strike in Venezuela",x:"Ambassador James Story (Ambassador retired), Managing Partner at Global Frontier Advisors, published a new op-ed in MS NOW on the evolving U.S. approach to security in the Western Hemisphere."},
+  {cat:"Media",date:"May 2026",src:"LinkedIn",img:"https://lh3.googleusercontent.com/d/1TanSoiuqwvt5nSnc66U8x1X9_ARv3FtT",t:"Lt. Gen. Bellon briefs CalPERS on Middle East geopolitical risk",x:"Partner Dave Bellon met with the CalPERS Board of Administration to discuss geopolitical risk and its implications for institutional capital allocation."},
+  {cat:"Firm",date:"Jun 2026",src:"Karbon-K",img:"https://lh3.googleusercontent.com/d/1I77mW8FDsDS8lN1UYIt_EihjmXRHYoyI",t:"Evertrak and Karbon-X sign letter of intent on plastic waste reduction credits",x:"The agreement pairs Evertrak's recycled-plastic railroad ties with a Verra-aligned carbon credit initiative — an infrastructure-linked climate model the firm supports across its client relationships."},
+  {cat:"Media",date:"May 2026",src:"News Interview",img:"Media — 1200&times;750",t:"Lt. Gen. Bellon on infrastructure resilience and interagency coordination",x:"Perspectives on the security dimensions of critical infrastructure in an era of strategic competition."},
+  {cat:"Insight",date:"Apr 2026",src:"GFA Insight",img:"Insight — 1200&times;750",t:"Navigating regulatory risk in frontier energy markets",x:"A framework for evaluating political and regulatory exposure before committing capital abroad."},
+  {cat:"Firm",date:"Apr 2026",src:"Announcement",img:"Firm — 1200&times;750",t:"Global Frontier Advisors deepens its bench of senior advisors",x:"Expanding the firm's reach across North American frontier capital and resource-sector relationships."}
+];
+
+/* ============ RENDER ============ */
+const practiceCard=p=>`<div class="pcard" data-route="practice/${p.slug}"><span class="idx">${p.n}</span><h3>${p.t}</h3><p>${p.s}</p><span class="more">Learn more <span class="arw">&rarr;</span></span></div>`;
+const memberCard=m=>`<div class="member"><div class="photo" style="--img:url('${m.photo}')"></div><div class="info"><div class="role">${m.role}</div><h3>${m.name}${m.suffix?` <span style="font-size:.62em;color:var(--gray);font-style:italic">${m.suffix}</span>`:''}</h3><p class="short">${m.short}</p><div class="actions"><a class="textlink" data-route="team/${m.slug}">Read full bio <span class="arw">&rarr;</span></a><a class="li" href="${m.li}" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4V21H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.06 3.76-2.06C20.4 8.56 21 10.5 21 13.2V21h-4v-6.9c0-1.64-.03-3.75-2.29-3.75-2.3 0-2.65 1.79-2.65 3.63V21H9z"/></svg></a></div></div></div>`;
+const newsCard=a=>`<div class="nart" data-cat="${a.cat}"><div class="photo" style="--img:url('${a.img}')"></div><div class="nc"><div class="meta"><span>${a.cat}</span><span class="date">${a.date}</span></div><h3>${a.t}</h3><p>${a.x}</p><span class="src">${a.src}</span></div></div>`;const paItem=p=>`<div class="pa-item" id="pa-${p.slug}"><div class="num">${p.n}</div><div><h3>${p.t}</h3><p class="d">${p.s}</p><ul class="caps">${p.caps.map(c=>`<li>${c}</li>`).join('')}</ul></div></div>`;
+
+document.getElementById('homePractice').innerHTML=PRACTICES.map(practiceCard).join('');
+document.getElementById('homeTeam').innerHTML=TEAM.map(memberCard).join('');
+document.getElementById('fullTeam').innerHTML=TEAM.map(memberCard).join('');
+document.getElementById('homeNews').innerHTML=NEWS.slice(0,3).map(newsCard).join('');
+document.getElementById('fullNews').innerHTML=NEWS.map(newsCard).join('');
+document.getElementById('practiceDetail').innerHTML=PRACTICES.map(paItem).join('');
+document.getElementById('ddPractice').innerHTML=PRACTICES.map(p=>`<a data-route="practice/${p.slug}">${p.t}</a>`).join('');
+
+const cats=['All',...[...new Set(NEWS.map(n=>n.cat))]];
+document.getElementById('newsFilters').innerHTML=cats.map((c,i)=>`<button class="${i===0?'active':''}" data-filter="${c}">${c}</button>`).join('');
+document.getElementById('newsFilters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#newsFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;document.querySelectorAll('#fullNews .nart').forEach(a=>{a.style.display=(f==='All'||a.dataset.cat===f)?'flex':'none';});});
+
+/* ============ BIO RENDER ============ */
+function renderBio(slug){
+  const m=TEAM.find(x=>x.slug===slug);if(!m)return false;
+  document.getElementById('bRole').textContent=m.role;
+  document.getElementById('bName').innerHTML=m.name+(m.suffix?` <span style="font-size:.55em;color:var(--gray);font-style:italic">${m.suffix}</span>`:'');
+  document.getElementById('bPhoto').style.setProperty('--img', `url('${m.photo}')`);
+  document.getElementById('bBody').innerHTML=m.bio.map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('bLi').href=m.li;
+  return true;
+}
+
+/* ============ ROUTER ============ */
+const basePages=['home','about','team','practice','mission','news','contact'];
+function setActive(name){document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===name));}
+function go(route){
+  route=route||'home';
+  const [base,slug]=route.split('/');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const hdr=document.getElementById('hdr');
+  if(base==='team'&&slug){
+    if(!renderBio(slug)){go('team');return;}
+    document.getElementById('page-bio').classList.add('active');
+    setActive('team');hdr.classList.remove('on-hero');
+    history.replaceState(null,'','#team/'+slug);
+    window.scrollTo({top:0,behavior:'auto'});closeMob();
+  }else if(base==='practice'&&slug){
+    document.getElementById('page-practice').classList.add('active');
+    setActive('practice');hdr.classList.remove('on-hero');
+    history.replaceState(null,'','#practice/'+slug);
+    closeMob();
+    const el=document.getElementById('pa-'+slug);
+    if(el){setTimeout(()=>el.scrollIntoView({behavior:'auto',block:'start'}),40);}
+    else{window.scrollTo({top:0,behavior:'auto'});}
+  }else if(basePages.includes(base)){
+    document.getElementById('page-'+base).classList.add('active');
+    setActive(base);hdr.classList.toggle('on-hero',base==='home');
+    history.replaceState(null,'',base==='home'?'#':'#'+base);
+    window.scrollTo({top:0,behavior:'auto'});closeMob();
+  }else{go('home');return;}
+}
+document.body.addEventListener('click',e=>{
+  const el=e.target.closest('[data-route],[data-nav]');
+  if(el){e.preventDefault();go(el.dataset.route||el.dataset.nav);}
+});
+window.addEventListener('scroll',()=>{
+  const hdr=document.getElementById('hdr');
+  if(document.getElementById('page-home').classList.contains('active')){hdr.classList.toggle('on-hero',window.scrollY<window.innerHeight-90);}
+},{passive:true});
+
+/* ============ MOBILE NAV ============ */
+function closeMob(){document.getElementById('mobnav').classList.remove('open')}
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('mobnav').classList.add('open'));
+document.getElementById('mobX').addEventListener('click',closeMob);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMob();});
+
+/* deep link */
+const init=location.hash.replace('#','');
+if(init)go(init);
+</script>
+</body>
+</html>
