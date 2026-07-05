@@ -976,7 +976,7 @@ function renderBio(slug){
 }
 
 /* ============ ROUTER ============ */
-const basePages=['home','about','team','practice','mission','news','contact','privacy','legal'];
+const basePages=['home','about','team','practice','sector','geo','mission','news','contact','privacy','legal'];
 function setActive(name){document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===name));}
 function go(route){
   route=route||'home';
