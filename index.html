@@ -29,7 +29,15 @@
     --line-light:rgba(245,243,239,.18);
     --serif:"Bodoni Moda",Georgia,"Times New Roman",serif;
     --sans:"Work Sans",system-ui,-apple-system,sans-serif;
+    /* --- LOGOTYPE FONT ---
+       Requested: Larken Bold, uppercase — commercial typeface (not on Google Fonts / free CDNs).
+       When the licensed webfont is available, add:
+         @font-face{font-family:"Larken";src:url('fonts/Larken-Bold.woff2') format('woff2');font-weight:700}
+       and change the line below to:  --logo-font:"Larken",var(--serif);  */
     --logo-font:var(--serif);
+    /* --- BODONI OPTICAL SIZE ---
+       Lower = thicker hairlines / less contrast.  Higher = finer hairlines / more contrast.
+       Range 6–96. 30 is a sturdy-but-elegant middle. Bump to 45–60 for more drama. */
     --opsz:10;
     --maxw:1240px;
     --gut:clamp(20px,5vw,64px);
@@ -47,6 +55,7 @@
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
 
+  /* ---------- Typography ---------- */
   .eyebrow{
     font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.28em;
     text-transform:uppercase;color:var(--gold);display:inline-block;
@@ -61,10 +70,12 @@
   p.lead{font-size:clamp(1.05rem,1.6vw,1.35rem);line-height:1.55;color:var(--charcoal);font-weight:300}
   .muted{color:var(--gray)}
 
+  /* ---------- Layout helpers ---------- */
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
   section{padding:clamp(64px,9vw,130px) 0}
   .hair{height:1px;background:var(--line);border:0;width:100%}
 
+/* ---------- Header ---------- */
   header{
     position:fixed;top:0;left:0;right:0;z-index:100;
     background:rgba(245,243,239,.86);backdrop-filter:blur(10px);
@@ -72,29 +83,32 @@
   }
   header.on-hero{background:transparent;border-bottom:1px solid rgba(245,243,239,.14)}
   .topline{height:2px;background:var(--gold);width:100%}
-  .nav{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);height:74px;display:flex;align-items:center;justify-content:space-between}
-  .brand{
-    font-family:var(--logo-font);
-    font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;
-    font-variation-settings:'opsz' var(--opsz),'wght' 600;font-weight:600;
-  }
+.nav{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{
+  font-family:var(--logo-font);
+  font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);white-space:nowrap;
+  font-variation-settings:'opsz' var(--opsz),'wght' 600;font-weight:600;
+  flex-shrink:0;
+}
   .brand-logo{height:17px;width:auto;display:block;color:var(--navy)}
   header.on-hero .brand-logo{color:var(--offwhite)}
   header.on-hero .brand{color:var(--offwhite)}
-  .navlinks{display:flex;gap:clamp(18px,2.4vw,38px);align-items:center}
-  .navlinks > a, .navlinks .dd > a{font-size:12.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);position:relative;padding:6px 0;transition:color .25s;display:inline-block}
+  .navlinks{display:flex;gap:clamp(18px,2.4vw,30px);align-items:center}
+  .navlinks > a, .navlinks .dd > a{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);position:relative;padding:6px 0;transition:color .25s;display:inline-block;white-space:nowrap}
   header.on-hero .navlinks > a, header.on-hero .navlinks .dd > a{color:rgba(245,243,239,.82)}
   .navlinks > a::after, .navlinks .dd > a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .3s ease}
   .navlinks > a:hover::after,.navlinks > a.active::after,.navlinks .dd > a:hover::after,.navlinks .dd > a.active::after{width:100%}
   .navlinks > a:hover,.navlinks .dd > a:hover{color:var(--gold)}
   .navlinks > a.active,.navlinks .dd > a.active{color:var(--gold)}
 
-  .navcta{border:1px solid var(--gold);padding:8px 18px!important;transition:background .25s,color .25s,border-color .25s!important}
+  /* Contact CTA: outline by default, fills on hover. Themed for light vs. hero (dark) header. */
+  .navcta{border:1px solid var(--navy);padding:8px 18px!important;transition:background .25s,color .25s,border-color .25s!important}
   .navcta::after{display:none}
-  .navcta:hover{background:var(--gold);color:var(--offwhite)!important}
+  .navcta:hover{background:var(--navy);color:var(--offwhite)!important}
   header.on-hero .navcta{border-color:rgba(245,243,239,.55)}
   header.on-hero .navcta:hover{background:var(--offwhite);color:var(--navy)!important;border-color:var(--offwhite)}
 
+  /* Practice Areas dropdown */
   .dd{position:relative}
   .ddmenu{
     position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);
@@ -111,10 +125,14 @@
   .menu-btn span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:.3s}
   header.on-hero .menu-btn span{background:var(--offwhite)}
 
+  /* ---------- Pages ---------- */
   .page{display:none}
   .page.active{display:block;animation:fade .5s ease}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+  /* ---------- Photo placeholders ----------
+     To drop a real image: add  style="--img:url('images/file.jpg')"  to any .photo element.
+     The duotone/B&W treatment applies automatically; remove a class to reduce it. */
   .photo{position:relative;background:#0d2244 center/cover no-repeat;overflow:hidden;background-image:var(--img,none)}
   .photo::before{
     content:"";position:absolute;inset:0;z-index:1;
@@ -131,6 +149,7 @@
   .photo.bw::before{background:linear-gradient(180deg,rgba(20,20,20,.12),rgba(20,20,20,.72)),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px)}
   .photo.head::before{background:linear-gradient(180deg,rgba(13,34,68,.10),rgba(13,34,68,.34))}
 
+  /* ---------- Buttons ---------- */
   .btn{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:15px 30px;border:1px solid var(--navy);color:var(--navy);background:transparent;cursor:pointer;transition:.28s;display:inline-flex;align-items:center;gap:12px}
   .btn:hover{background:var(--navy);color:var(--offwhite)}
   .btn.gold{border-color:var(--gold);color:var(--gold)}
@@ -144,8 +163,9 @@
   .textlink:hover{border-color:var(--gold)}
   .textlink:hover .arw{transform:translateX(5px)}
 
+  /* ---------- Hero ---------- */
   .hero{
-    --hero-img:none;
+    --hero-img:none; /* set to url('images/hero-dc.jpg') to drop a real hero photo */
     position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--offwhite);
     background-image:
       linear-gradient(180deg,rgba(13,34,68,.42) 0%,rgba(13,34,68,.58) 45%,rgba(13,34,68,.92) 100%),
@@ -161,18 +181,21 @@
   .scrollcue{position:absolute;right:var(--gut);bottom:44px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(245,243,239,.55);writing-mode:vertical-rl;display:flex;align-items:center;gap:14px}
   .scrollcue::after{content:"";width:1px;height:54px;background:linear-gradient(var(--gold),transparent)}
 
+  /* ---------- Thesis band ---------- */
   .thesis{background:var(--navy);color:var(--offwhite)}
   .thesis .eyebrow{margin-bottom:30px}
   .thesis h2{font-size:clamp(1.9rem,3.8vw,3.3rem);max-width:20ch;color:var(--offwhite);line-height:1.12}
   .thesis .cols{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(30px,6vw,90px);align-items:end;margin-top:8px}
   .thesis p{color:rgba(245,243,239,.78);font-weight:300;font-size:1.08rem;max-width:44ch}
 
+  /* ---------- Section head ---------- */
   .shead{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(38px,5vw,64px);flex-wrap:wrap}
   .shead .eyebrow{margin-bottom:18px}
   .shead-left{max-width:44ch}
   .shead p{margin-top:16px;color:var(--gray);font-weight:300;font-size:1.05rem}
 
-  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  /* ---------- Practice grid ---------- */
+  .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
   .pcard{background:var(--offwhite);padding:clamp(26px,3vw,40px);cursor:pointer;transition:background .3s,grid-column .35s ease;position:relative;min-height:230px;display:flex;flex-direction:column}
   .pcard:hover{background:var(--white)}
   .pcard .idx{font-family:var(--serif);font-size:13px;color:var(--gold);letter-spacing:.1em}
@@ -181,10 +204,11 @@
   .pcard .more{margin-top:22px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);opacity:0;transform:translateY(6px);transition:.3s}
   .pcard:hover .more{opacity:1;transform:none}
   .pcard .more .arw{color:var(--gold)}
-  .pcard.last{grid-column:span 2}
   .pcard.hover-wide{grid-column:span 2}
   .pcard.hover-narrow{grid-column:span 1}
 
+  /* ---------- Arena: single full-bleed image band (DC) ----------
+     Drop the photo:  style="--img:url('images/arena-washington.jpg')"  */
   .arena{
   position:relative;padding:0;min-height:78vh;display:flex;align-items:flex-end;color:var(--offwhite);
   background-image:
@@ -192,7 +216,7 @@
     var(--img,none),
     linear-gradient(135deg,#12294f,#081a37);
   background-size:cover;background-position:center;background-attachment:fixed;
-  filter:grayscale(.6) contrast(1.1);
+  filter:grayscale(.6) contrast(1.1);   /* nuevo: desatura la foto de fondo antes del gradiente */
 }
   .arena .cap{padding:clamp(40px,7vh,88px) 0}
   .arena .cap .k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px}
@@ -200,6 +224,7 @@
   .arena .cap p{font-weight:300;color:rgba(245,243,239,.82);max-width:40ch;font-size:1.05rem}
   .imgtag{position:absolute;right:16px;bottom:14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,239,.4);font-weight:500}
 
+  /* ---------- Team ---------- */
   .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,3vw,48px)}
   .member{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column}
   .member .photo{aspect-ratio:4/5;width:100%}
@@ -212,6 +237,7 @@
   .li:hover{color:var(--gold)}
   .li svg{width:16px;height:16px;fill:currentColor}
 
+  /* Team page: wide horizontal card (photo beside text, not stacked) */
   .team-section-head{margin-bottom:28px}
   .team-section-head .k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;display:block;margin-bottom:10px}
   .team-section-head .rule{height:2px;width:48px;background:rgba(212,168,50,.35)}
@@ -228,6 +254,7 @@
     .member.wide .photo{width:100%}
   }
 
+  /* ---------- Bio page ---------- */
   .backlink{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,243,239,.7);display:inline-block;margin-bottom:26px;transition:.25s}
   .backlink:hover{color:var(--gold)}
   .bio-layout{display:grid;grid-template-columns:360px 1fr;gap:clamp(34px,5vw,72px);align-items:start}
@@ -235,6 +262,7 @@
   .bio-photo .li{margin-top:22px}
   .bio-body p{font-weight:300;font-size:1.08rem;line-height:1.75;margin-bottom:20px;color:var(--charcoal);max-width:62ch}
 
+  /* ---------- About / Mission ---------- */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,6vw,90px);align-items:center}
   .two.rev .col-txt{order:2}
   .prose p{font-weight:300;font-size:1.08rem;line-height:1.7;margin-bottom:22px;max-width:60ch}
@@ -248,6 +276,7 @@
   .stat .l{margin-top:14px;font-size:12px;letter-spacing:.06em;color:var(--gray);font-weight:300}
   .stat .n .u{color:var(--gold);font-size:.6em;vertical-align:super}
 
+  /* ---------- Practice detail ---------- */
   .pa-item{border-top:1px solid var(--line);padding:clamp(40px,5vw,64px) 0;scroll-margin-top:96px;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,48px)}
 .pa-item:first-child{border-top:0}
 .pa-item:last-child{border-bottom:1px solid var(--line)}
@@ -267,15 +296,17 @@
   .pa-item .pa-head{flex:0 0 30%}
 }
 
+  /* ---------- Sector Focus (dark card grid) ---------- */
   .sector-band{background:var(--navy);color:var(--offwhite)}
-  .sector-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-light);border:1px solid var(--line-light);margin-top:38px}
-  .sector-card{background:var(--navy);padding:clamp(26px,3vw,40px)}
-  .sector-card .arw-ic{color:var(--gold);font-size:1.1rem;display:block;margin-bottom:14px}
-  .sector-card h3{color:var(--offwhite);font-size:1.25rem;margin-bottom:12px}
-  .sector-card p{color:rgba(245,243,239,.72);font-weight:300;font-size:.95rem;line-height:1.55}
-  @media(max-width:820px){.sector-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.sector-grid{grid-template-columns:1fr}}
+  .sector-grid,.whygfa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-light);border:1px solid var(--line-light);margin-top:38px}
+  .sector-card,.whygfa-card{background:var(--navy);padding:clamp(26px,3vw,40px)}
+  .sector-card .arw-ic,.whygfa-card .arw-ic{color:var(--gold);font-size:1.1rem;display:block;margin-bottom:14px}
+  .sector-card h3,.whygfa-card h3{color:var(--offwhite);font-size:1.25rem;margin-bottom:12px}
+  .sector-card p,.whygfa-card p{color:rgba(245,243,239,.72);font-weight:300;font-size:.95rem;line-height:1.55}
+  @media(max-width:820px){.sector-grid,.whygfa-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.sector-grid,.whygfa-grid{grid-template-columns:1fr}}
 
+  /* ---------- Geographic Reach (light card grid) ---------- */
   .geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
   .geo-card{background:var(--offwhite);padding:clamp(26px,3vw,40px)}
   .geo-card h3{color:var(--navy);font-size:1.2rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
@@ -283,9 +314,18 @@
   .geo-card p{color:var(--charcoal);font-weight:300;font-size:.98rem;line-height:1.6}
   @media(max-width:640px){.geo-grid{grid-template-columns:1fr}}
 
+  /* ---------- News ---------- */
   .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:44px}
   .filters button{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:9px 18px;border:1px solid var(--line);background:transparent;color:var(--gray);cursor:pointer;transition:.25s}
   .filters button.active,.filters button:hover{background:var(--navy);color:var(--offwhite);border-color:var(--navy)}
+  .filters-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:44px}
+  .filters-row .filters{margin-bottom:0}
+  .news-search{position:relative;flex-shrink:0}
+  .news-search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:15px;height:15px;fill:var(--gray);pointer-events:none}
+  .news-search input{font-family:var(--sans);font-size:.9rem;font-weight:300;color:var(--charcoal);background:var(--white);border:1px solid var(--line);padding:10px 16px 10px 38px;width:240px;transition:border-color .25s}
+  .news-search input:focus{outline:none;border-color:var(--gold)}
+  .news-search input::placeholder{color:var(--gray)}
+  @media(max-width:640px){.filters-row{flex-direction:column}.news-search,.news-search input{width:100%}}
   .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
   .nart{background:var(--offwhite);display:flex;flex-direction:column;cursor:pointer;transition:.3s}
   .nart:hover{background:var(--white)}
@@ -297,6 +337,7 @@
   .nart p{font-size:.92rem;color:var(--gray);font-weight:300;flex:1;margin-bottom:18px}
   .nart .src{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);font-weight:500}
 
+  /* ---------- Contact ---------- */
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,110px)}
   .field{margin-bottom:26px}
   .field label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:10px;font-weight:500}
@@ -317,6 +358,7 @@
   .ctastrip h2{font-size:clamp(1.8rem,3.6vw,3rem);color:var(--offwhite);max-width:24ch;margin:0 auto 34px}
   .ctastrip .eyebrow{margin-bottom:24px}
 
+  /* ---------- Footer ---------- */
   footer{background:#081a37;color:rgba(245,243,239,.7)}
   .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding:clamp(56px,7vw,90px) 0 clamp(40px,5vw,60px)}
   .foot-mark{height:40px;width:auto;display:block;color:var(--offwhite);margin-bottom:20px}  .foot .tag{font-weight:300;font-size:.95rem;max-width:34ch;color:rgba(245,243,239,.6)}
@@ -331,13 +373,14 @@
   .foot-bot .liftr a{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,243,239,.6);cursor:pointer}
   .foot-bot .liftr a:hover{color:var(--gold)}
 
+  /* ---------- Mobile nav ---------- */
   .mobnav{position:fixed;inset:0;z-index:150;background:var(--navy);display:none;flex-direction:column;justify-content:center;padding:0 var(--gut)}
   .mobnav.open{display:flex;animation:fade .3s}
   .mobnav a{font-family:var(--serif);font-size:2rem;color:var(--offwhite);padding:14px 0;border-bottom:1px solid var(--line-light);font-variation-settings:'opsz' var(--opsz),'wght' 500}
   .mobnav a:last-child{border:0}
   .mobnav a.active{color:var(--gold)}
   .mobnav .x{position:absolute;top:24px;right:var(--gut);background:none;border:0;color:var(--offwhite);font-size:34px;cursor:pointer}
-
+ 
   /* ---------- Legal pages (Privacy / Terms / Disclaimer) ---------- */
   .legal-body{max-width:760px}
   .legal-updated{font-size:.92rem;color:var(--gray);font-weight:300;margin-bottom:8px}
@@ -357,10 +400,6 @@
   .legal-sep{height:1px;background:var(--line);margin:56px 0}
   .legal-doc-title{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:14px;display:block}
 
-  @media(max-width:1080px){
-    .pgrid{grid-template-columns:1fr}
-    .pcard.last{grid-column:span 1}
-  }
   @media(max-width:900px){
     .navlinks{display:none}.menu-btn{display:block}
     .thesis .cols{grid-template-columns:1fr;gap:28px}
@@ -418,10 +457,11 @@
       <a data-nav="about">About</a>
       <a data-nav="team">Team</a>
       <div class="dd">
-        <a data-nav="practice">Practice Areas</a>
+        <a data-nav="practice">Services</a>
         <div class="ddmenu" id="ddPractice"></div>
       </div>
-      <a data-nav="mission">Mission</a>
+      <a data-nav="sector">Sector Focus</a>
+      <a data-nav="geo">Geographic Reach</a>
       <a data-nav="news">News</a>
       <a data-nav="contact" class="navcta">Contact</a>
     </div>
@@ -434,8 +474,9 @@
   <a data-nav="home">Home</a>
   <a data-nav="about">About</a>
   <a data-nav="team">Team</a>
-  <a data-nav="practice">Practice Areas</a>
-  <a data-nav="mission">Mission</a>
+  <a data-nav="practice">Services</a>
+  <a data-nav="sector">Sector Focus</a>
+  <a data-nav="geo">Geographic Reach</a>
   <a data-nav="news">News</a>
   <a data-nav="contact">Contact</a>
 </div>
@@ -446,9 +487,9 @@
 <div class="page active" id="page-home">
   <section class="hero" style="--hero-img:url('https://lh3.googleusercontent.com/d/17TrPTnT9vV8HCeEoHtYPILBmXabOuzeO')">
       <div class="wrap">
-      <span class="eyebrow">Global Strategic Advisory</span>
-      <h1 class="display">Strategic counsel for the world's most complex markets.</h1>
-      <p>Global Frontier Advisors serves corporates, investors, and institutions on their most consequential objectives — where commercial ambition meets political complexity.</p>
+      <span class="eyebrow">Strategic Advisory in Frontier Markets</span>
+      <h1 class="display">Creating strategic advantage on a global scale.</h1>
+      <p>Global Frontier Advisors helps companies navigate complexity, unlock opportunity, and execute with confidence by leveraging decades of leadership, trusted relationships, and operational expertise developed at the highest levels of government, the military, and frontier markets.</p>
       <div class="hero-cta">
         <a class="btn light" data-nav="about">About the firm <span>&rarr;</span></a>
         <a class="btn gold" data-nav="contact">Contact the firm</a>
@@ -470,13 +511,15 @@
   <section>
     <div class="wrap">
       <div class="shead">
-        <div class="shead-left"><span class="eyebrow">Practice areas</span><h2 class="section-title">Five practices. One partnership.</h2></div>
-        <a class="textlink" data-nav="practice">View all practice areas <span class="arw">&rarr;</span></a>
+        <div class="shead-left"><span class="eyebrow">Services</span><h2 class="section-title">What we do.</h2></div>
+        <a class="textlink" data-nav="practice">View all services <span class="arw">&rarr;</span></a>
       </div>
       <div class="pgrid" id="homePractice"></div>
     </div>
   </section>
 
+  <!-- Single full-bleed image band. Washington imagery as atmosphere (Pallas-style).
+       Additional presence cities are listed discreetly on the Contact page — pending RM. -->
   <section class="arena" style="--img:url(https://lh3.googleusercontent.com/d/1cQSverDK8vgSPjMMG04yMF0zmAjUAuRQ)">
     <div class="wrap"><div class="cap">
       <span class="k">The Firm</span>
@@ -508,7 +551,7 @@
 
   <section class="ctastrip">
     <div class="wrap">
-            <a class="btn gold" data-nav="contact">Contact the firm</a>
+      <a class="btn gold" data-nav="contact">Contact the firm</a>
     </div>
   </section>
 </div>
@@ -516,34 +559,27 @@
 <!-- ===================== ABOUT ===================== -->
 <div class="page" id="page-about">
   <section class="page-hero"><div class="wrap">
-    <span class="eyebrow">About the firm</span>
-    <h1>An advisory partnership built on judgment and standing.</h1>
-    <p>Global Frontier Advisors advises corporates, investors, and institutions on their most consequential objectives in frontier and emerging markets.</p>
+    <span class="eyebrow">About GFA</span>
+    <h1>Strategic advisory in frontier markets.</h1>
+    <p>Creating strategic advantage on a global scale.</p>
   </div></section>
   <section><div class="wrap"><div class="two">
     <div class="col-txt prose">
-      <p class="big">In the world's most complex jurisdictions, outcomes are determined by judgment, relationships, and standing — assets that cannot be acquired quickly.</p>
-      <p>The firm was founded by four principals whose careers span the U.S. military, the diplomatic corps, the interagency, and two decades of operating in frontier markets. That experience affords the firm something research alone cannot: the ability to make the introduction, place the call, and open the door.</p>
-      <p>Global Frontier Advisors serves its clients on a retainer basis, as a long-term strategic partner. Its clients are corporates, investors, and institutions who require the confidence to operate in the markets others avoid.</p>
+      <p>Global Frontier Advisors is a U.S.-based strategic advisory firm that helps companies navigate complexity and unlock opportunity across the United States and the world's most challenging markets. Operating at the intersection of national security, economic resilience, and frontier market development, we advise organizations in sectors critical to U.S. and allied interests—including critical minerals, energy, infrastructure, defense, and artificial intelligence.</p>
+      <p>The firm is led by senior leaders from government, the military, and industry, including two former three-star U.S. Marine Corps generals, the former U.S. Ambassador to Venezuela, and entrepreneurs who have built and operated companies in frontier markets for decades. Our bipartisan team brings insights gained at the highest levels of government, extensive global networks, and the operational expertise to help clients navigate complex challenges, capitalize on emerging opportunities, and achieve durable growth.</p>
+      <p>GFA was built for this moment. The global economy and geopolitical landscape are undergoing profound change. Geopolitical competition, the race for artificial intelligence, the reshoring of allied supply chains, and the drive to reduce strategic dependence on foreign adversaries are reshaping markets and redefining U.S. commercial diplomacy. GFA helps clients identify opportunities created by this global realignment, align their strategies with long-term policy and market trends, and execute with confidence in complex operating environments.</p>
     </div>
     <div class="photo figure" style="--img:url('https://lh3.googleusercontent.com/d/1O6pc6qUYFhw0C3ayvww8wtIKAVIbTyD-')"></div>
   </div></div></section>
-  <section style="background:var(--white);padding-top:40px;padding-bottom:40px"><div class="wrap"><div class="stat-row">
-    <div class="stat"><div class="n">4</div><div class="l">Firm partners</div></div>
-    <div class="stat"><div class="n">35<span class="u">yr</span></div><div class="l">Marine Corps command experience</div></div>
-    <div class="stat"><div class="n">3</div><div class="l">Continents of operating history</div></div>
-    <div class="stat"><div class="n">1</div><div class="l">Network built over decades of service</div></div>
-  </div></div></section>
-  <section style="background:var(--white);padding-top:40px"><div class="wrap"><div class="two rev">
-    <div class="col-fig"><div class="photo figure wide" style="background-image:url('https://lh3.googleusercontent.com/d/15oZSKIIngFmoAGHAsQGTnS1vmkaUmHke')"></div></div>
-    <div class="col-txt prose">
-      <span class="eyebrow">How we work</span>
-      <h2 class="section-title" style="margin:18px 0 26px">Discretion and judgment.</h2>
-      <p>Much of the firm's work is, by its nature, confidential. Discretion is not a courtesy extended to clients — it is a condition of the work itself.</p>
-      <p>Each engagement draws on the full partnership. A client does not retain one relationship; they gain access to a network built across decades of service in government, defense, diplomacy, and institutional capital.</p>
-      <a class="textlink" data-nav="practice" style="margin-top:8px">View practice areas <span class="arw">&rarr;</span></a>
+  <section class="sector-band"><div class="wrap">
+    <span class="eyebrow">Why GFA</span>
+    <h2 class="section-title" style="color:var(--offwhite);margin-top:14px">Why us.</h2>
+    <div class="whygfa-grid">
+      <div class="whygfa-card"><span class="arw-ic">&rsaquo;</span><h3>Trusted Relationships</h3><p>Trusted relationships across government and industry. Deep networks, senior-level access, and results-driven advocacy.</p></div>
+      <div class="whygfa-card"><span class="arw-ic">&rsaquo;</span><h3>'Muddy Boots' Approach</h3><p>We support our clients on the ground, where we convert strategy into results.</p></div>
+      <div class="whygfa-card"><span class="arw-ic">&rsaquo;</span><h3>Senior Leadership</h3><p>Senior military and diplomatic leadership with frontier-market operating experience.</p></div>
     </div>
-  </div></div></section>
+  </div></section>
   <section class="ctastrip"><div class="wrap">
     <span class="eyebrow">The partnership</span><h2>The partners behind the firm.</h2>
     <a class="btn gold" data-nav="team">Meet the partners</a>
@@ -553,17 +589,17 @@
 <!-- ===================== TEAM ===================== -->
 <div class="page" id="page-team">
   <section class="page-hero"><div class="wrap">
-    <span class="eyebrow">The partnership</span>
-    <h1>A partnership of four principals.</h1>
-    <p>Global Frontier Advisors is led by partners drawn from the most senior levels of U.S. military, diplomatic, and commercial leadership.</p>
+    <span class="eyebrow">Team</span>
+    <h1>Experience earned through leadership. Relationships built over decades.</h1>
+    <p>GFA brings together former senior military commanders, diplomats, entrepreneurs and executives who have led large organizations, shaped policy, and delivered results in some of the world's most complex operating environments.</p>
   </div></section>
   <section><div class="wrap">
     <div class="team-block">
-      <div class="team-section-head"><span class="k">Managing &amp; Founding Partners</span><div class="rule"></div></div>
+      <div class="team-section-head"><span class="k">Partners</span><div class="rule"></div></div>
       <div class="team-grid wide" id="fullTeamPartners"></div>
     </div>
     <div class="team-block">
-      <div class="team-section-head"><span class="k">Senior Advisory Bench</span><div class="rule"></div></div>
+      <div class="team-section-head"><span class="k">Senior Advisor</span><div class="rule"></div></div>
       <div class="team-grid wide" id="fullTeamAdvisors"></div>
     </div>
   </div></section>
@@ -595,32 +631,48 @@
   </div></section>
 </div>
 
-<!-- ===================== PRACTICE ===================== -->
+<!-- ===================== SERVICES ===================== -->
 <div class="page" id="page-practice">
   <section class="page-hero"><div class="wrap">
-    <span class="eyebrow">Practice areas</span>
-    <h1>Advisory services across five practice areas.</h1>
-    <p>Each practice draws on the same foundation: the partnership's relationships across government, defense, diplomacy, and institutional capital.</p>
+    <span class="eyebrow">Services</span>
+    <h1>What we do.</h1>
+    <p>An unmatched combination of frontier-market experience, trusted relationships, and commercial-sector expertise.</p>
   </div></section>
   <section><div class="wrap" id="practiceDetail"></div></section>
+  <section class="ctastrip"><div class="wrap">
+    <a class="btn gold" data-nav="contact">Contact the firm</a>
+  </div></section>
+</div>
 
-  <section class="sector-band" id="pa-sector-focus" style="scroll-margin-top:96px"><div class="wrap">
-    <span class="eyebrow">Sector focus</span>
-    <h2 class="section-title" style="color:var(--offwhite);margin-top:14px">Where we focus.</h2>
-    <p style="color:rgba(245,243,239,.78);font-weight:300;max-width:62ch;margin-top:14px">We operate at the nexus of national security, economic resilience, and frontier market development — focusing on sectors critical to U.S. and allied interests.</p>
+<!-- ===================== SECTOR FOCUS (standalone) ===================== -->
+<div class="page" id="page-sector">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">Sector Focus</span>
+    <h1>Where we focus.</h1>
+    <p>We focus on sectors that define national power and are critical to U.S. and allied interests.</p>
+  </div></section>
+  <section class="sector-band"><div class="wrap">
     <div class="sector-grid">
       <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>Critical Minerals</h3><p>Securing supply of strategically vital resources.</p></div>
       <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>Energy</h3><p>Hydrocarbon and renewable sources to power tomorrow's energy supply.</p></div>
       <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>Infrastructure</h3><p>Roads, rail, ports, power, and connectivity.</p></div>
-      <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>Technology &amp; AI</h3><p>Frontier and dual-use technologies.</p></div>
+      <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>AI</h3><p>Frontier and dual-use technologies.</p></div>
       <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>Defense Technology</h3><p>Innovative technologies providing cutting-edge capability to national defense.</p></div>
       <div class="sector-card"><span class="arw-ic">&rsaquo;</span><h3>Transportation &amp; Logistics</h3><p>Critical infrastructure to secure and future-proof global supply chains.</p></div>
     </div>
   </div></section>
+  <section class="ctastrip"><div class="wrap">
+    <a class="btn gold" data-nav="contact">Contact the firm</a>
+  </div></section>
+</div>
 
-  <section id="pa-geo-reach" style="scroll-margin-top:96px"><div class="wrap">
-    <span class="eyebrow">Geographic reach</span>
-    <h2 class="section-title" style="margin-top:14px">Deep regional insight, trusted local networks.</h2>
+<!-- ===================== GEOGRAPHIC REACH (standalone) ===================== -->
+<div class="page" id="page-geo">
+  <section class="page-hero"><div class="wrap">
+    <span class="eyebrow">Geographic Reach</span>
+    <h1>Deep regional insight, trusted local networks.</h1>
+  </div></section>
+  <section><div class="wrap">
     <div class="geo-grid">
       <div class="geo-card"><h3><span class="arw-ic">&rsaquo;</span>Africa</h3><p>GFA's office in Liberia provides an on-the-ground presence across West Africa. David Kol has operated in the region for 15 years; Ambassador Story's reach extends across the continent.</p></div>
       <div class="geo-card"><h3><span class="arw-ic">&rsaquo;</span>Latin America</h3><p>Relationships across the senior most levels of government and the private sector built over a combined 25+ years advancing U.S. foreign policy throughout the region.</p></div>
@@ -628,7 +680,6 @@
       <div class="geo-card"><h3><span class="arw-ic">&rsaquo;</span>United States</h3><p>Networks embedded in the power centers that matter — Washington, Wall Street, and Silicon Valley — helping our clients access capital, open new markets, and mitigate risk.</p></div>
     </div>
   </div></section>
-
   <section class="ctastrip"><div class="wrap">
     <a class="btn gold" data-nav="contact">Contact the firm</a>
   </div></section>
@@ -671,7 +722,13 @@
     <p>Media appearances, remarks, and perspectives from the principals of Global Frontier Advisors.</p>
   </div></section>
   <section><div class="wrap">
-    <div class="filters" id="newsFilters"></div>
+    <div class="filters-row">
+      <div class="filters" id="newsFilters"></div>
+      <div class="news-search">
+        <svg viewBox="0 0 24 24"><path d="M10 4a6 6 0 104.47 10.03l4.75 4.75 1.42-1.42-4.75-4.75A6 6 0 0010 4zm0 2a4 4 0 110 8 4 4 0 010-8z"/></svg>
+        <input type="text" id="newsSearch" placeholder="Search news...">
+      </div>
+    </div>
     <div class="news-grid" id="fullNews"></div>
   </div></section>
 </div>
@@ -698,7 +755,6 @@
     </div>
   </div></div></section>
 </div>
-
 <!-- ===================== PRIVACY ===================== -->
 <div class="page" id="page-privacy">
   <section class="page-hero"><div class="wrap">
@@ -852,7 +908,7 @@
       </svg>
       <p class="tag">Global Frontier Advisors — strategic advisory for corporates, investors, and institutions operating in the world's most complex markets.</p>
     </div>
-    <div><h4>Firm</h4><ul><li><a data-nav="about">About</a></li><li><a data-nav="team">Team</a></li><li><a data-nav="mission">Mission</a></li><li><a data-nav="practice">Practice Areas</a></li></ul></div>
+    <div><h4>Firm</h4><ul><li><a data-nav="about">About</a></li><li><a data-nav="team">Team</a></li><li><a data-nav="practice">Services</a></li><li><a data-nav="sector">Sector Focus</a></li><li><a data-nav="geo">Geographic Reach</a></li></ul></div>
     <div><h4>Connect</h4><ul><li><a data-nav="news">News &amp; Insights</a></li><li><a data-nav="contact">Contact</a></li><li><a href="mailto:info@globalfrontieradvisors.com">info@globalfrontieradvisors.com</a></li><li><a href="#" target="_blank">LinkedIn &#8599;</a></li></ul></div>
   </div>
   <div class="foot-bot">
@@ -865,23 +921,22 @@
 /* ============ DATA ============ */
 const PRACTICES=[
   {n:"01",slug:"bespoke-advocacy",t:"Bespoke Advocacy Solutions",s:"Custom strategies and high-level engagement to advance our clients' interests and shape favorable outcomes in complex, politically sensitive environments.",caps:["Government Relations & Stakeholder Engagement — we engage officials, regulators, and policymakers on our clients' behalf to raise awareness and gain traction with key decision makers, drawing on relationships built over decades across the Pentagon, intelligence community, White House, Congress, and government agencies","Policy Alignment & Regulatory Compliance — aligning clients with U.S. policy objectives and international regulatory frameworks to help them achieve their goals and mitigate risk","Permit & Licensing Advocacy — cutting through bureaucratic delay and regulatory friction","Crisis Management & Communications — protecting reputation and stakeholder confidence through the deployment of disciplined communication strategies"]},
-  {n:"02",slug:"market-entry",t:"Market Entry & Business Development",s:"End-to-end support for companies entering or expanding into new markets — leveraging and building relationships with key local stakeholders to generate on-the-ground solutions and accelerate durable growth.",caps:["Market Intelligence & Strategy — assessing opportunity, regulatory landscape, and risk before clients commit capital","Local Partnerships & Access — connecting clients with the right operators, stakeholders, and government partners","On-the-Ground Execution — navigating approvals, trade barriers, and fragmented supply chains"]},
-  {n:"03",slug:"project-execution",t:"Project Execution",s:"Hands-on delivery of projects we help clients secure, including foreign government procurements.",caps:["End-to-end project delivery from award through completion","Foreign government procurement support","On-the-ground operational management"]},
-  {n:"04",slug:"deal-sourcing",t:"Deal Sourcing & Due Diligence",s:"We connect investors with vetted, high-value opportunities and apply rigorous diligence to validate them — pairing global reach with local intelligence to surface credible deals and address critical risks.",caps:["Proprietary Deal Sourcing — differentiated opportunities through trusted local and global networks","Political & Reputational Diligence — validating opportunities and uncovering risk before capital is deployed","Buy-Side Advisory — supporting private equity and strategic buyers in natural resources, infrastructure, defense technology, and government-services sectors, including highly regulated and classified segments"]},
-  {n:"05",slug:"geopolitical-advisory",t:"Geopolitical Advisory",s:"Operating in frontier regions carries unique risks and challenges to overcome — from regulatory uncertainty to security threats. We deliver comprehensive mitigation strategies, and the relationships and know-how to implement them.",caps:["Geopolitical Risk Assessment — political, regulatory, and macroeconomic conditions affecting strategic investments","Regulatory & Policy Monitoring — tracking shifts in trade, investment, and sector-specific policy before they take effect","Scenario Planning & Contingency — proactive strategies to sustain continuity in volatile environments","Security & Operational Risk — infrastructure vulnerabilities and social stability","ESG & Sustainability Risk — compliance and best practice as ESG factors shape investment decisions"]}
+  {n:"02",slug:"market-entry",t:"Market Entry & Business Development",s:"End-to-end support for companies entering or expanding into new markets — leveraging existing and helping build new relationships with key local stakeholders to secure favorable outcomes and accelerate growth.",caps:["Market Intelligence & Strategy — assessing opportunity, regulatory landscape, and risk before clients commit capital","Local Partnerships & Access — connecting clients with the right operators, stakeholders, and government partners","On-the-Ground Execution — navigating approvals, trade barriers, and fragmented supply chains"]},
+  {n:"03",slug:"deal-sourcing",t:"Deal Sourcing & Due Diligence",s:"We connect investors with vetted, high-value opportunities and apply rigorous diligence to validate them — pairing global reach with local intelligence to surface credible deals and address critical risks.",caps:["Proprietary Deal Sourcing — differentiated opportunities through trusted local and global networks","Political & Reputational Diligence — validating opportunities and uncovering risk before capital is deployed","Buy-Side Advisory — supporting private equity and strategic buyers in natural resources, infrastructure, defense technology, and government-services sectors, including highly regulated and classified segments"]},
+  {n:"04",slug:"geopolitical-advisory",t:"Geopolitical Risk Advisory",s:"Operating in frontier regions carries unique risks and challenges to overcome — from regulatory uncertainty to security threats. We deliver comprehensive mitigation strategies and relationships and know-how to implement them.",caps:["Geopolitical Risk Assessment — political, regulatory, and macroeconomic conditions affecting strategic investments","Regulatory & Policy Monitoring — tracking shifts in trade, investment, and sector-specific policy before they take effect","Scenario Planning & Contingency — proactive strategies to sustain continuity in volatile environments","Security & Operational Risk — infrastructure vulnerabilities and social stability","ESG & Sustainability Risk — compliance and best practice as ESG factors shape investment decisions"]}
 ];
 const TEAM=[
-  {slug:"michael-groen",name:"Lt. Gen. Michael Groen",suffix:"USMC (Ret.)",role:"Managing Partner",short:"Former Director of the DoD's Joint Artificial Intelligence Center and senior AI executive across defense.",photo:"https://lh3.googleusercontent.com/d/1SPuCeHhI3zIdQ4XYVCiQVTL2q8GsXCi3",li:"#",bio:["Lt. General Michael Groen (USMC, Ret.) served as Director of the Department of Defense's Joint Artificial Intelligence Center (JAIC), the senior executive responsible for artificial intelligence across the DoD.","A multi-tour combat veteran with deep expertise in intelligence and cyber operations, he held senior positions at the National Security Agency and served as Director of Joint Staff Intelligence.","At the firm, he is the primary bridge to the artificial intelligence and technology sector, and to defense and national-security relationships across government."]},
-  {slug:"james-story",name:"Ambassador James Story",suffix:"(Ret.)",role:"Founding Partner",short:"Retired Senior Foreign Service Officer and former U.S. Ambassador to Venezuela.",photo:"https://lh3.googleusercontent.com/d/1ot_DUF48iuCkiXY_1Y3abh5sCoWaYGO7",li:"#",bio:["Ambassador James \"Jimmy\" Story (Ret.) is a retired Senior Foreign Service Officer and former U.S. Ambassador to Venezuela, and Chargé d'Affaires to Angola and São Tomé and Príncipe.","He held key roles across Latin America, Africa, and the Caribbean, including Director of INL for the Western Hemisphere.","A recognized voice on hemispheric affairs, he is an active commentator, speaker, and columnist, and serves as a primary external face of the firm."]},
-  {slug:"david-bellon",name:"Lt. Gen. David Bellon",suffix:"USMC (Ret.)",role:"Founding Partner",short:"35-year Marine Corps veteran with extensive leadership across Latin America and the Middle East.",photo:"https://lh3.googleusercontent.com/d/1mlLqyF_MQbjMLZmoEQWtDcF5FjwGHUtM",li:"#",bio:["Lt. General David Bellon (USMC, Ret.) is a 35-year Marine Corps veteran with extensive leadership experience across Latin America and the Middle East, including command of the Marine Corps Reserve and Marine Corps Southern Division.","He has testified before Congress on security and infrastructure matters.","He brings deep access to the Department of Defense, the Department of Energy, and interagency relationships across the U.S. government."]},
-  {slug:"david-kol",name:"David Kol",suffix:"",role:"Founding Partner",short:"International business executive with 20+ years in frontier and emerging markets, including West Africa.",photo:"https://lh3.googleusercontent.com/d/1ZBT94ZWUQdeIKvqtZUZn6vRtlPKql4eX",li:"#",bio:["David Kol is a seasoned international business and startup executive with more than two decades of experience in frontier and emerging markets, including over fifteen years across West Africa.","He has led initiatives spanning finance, mergers and acquisitions, business development, and executive leadership across the resource, media, real estate, and technology sectors.","He is the firm's primary commercial and operational partner, with particular depth across West Africa, including Guinea and Liberia."]}
+  {slug:"david-bellon",name:"Lt. Gen. David Bellon",suffix:"USMC (Ret.)",role:"Partner",short:"A retired three-star general with a 35-year Marine Corps career and deep reach throughout the national security enterprise.",photo:"https://lh3.googleusercontent.com/d/1mlLqyF_MQbjMLZmoEQWtDcF5FjwGHUtM",li:"#",bio:["A retired three-star general and among the most senior leaders in the U.S. armed forces, with a 35-year Marine Corps career culminating as Commander of Marine Forces South and Commander of the Marine Corps Reserve. David brings extensive operational experience across Latin America and the Middle East, deep reach throughout the national security enterprise, and advises several leading U.S. investment firms on geopolitics and foreign policy."]},
+  {slug:"james-story",name:"Amb. James \u201cJimmy\u201d Story",suffix:"(Ret.)",role:"Partner",short:"A highly decorated career diplomat and former U.S. Ambassador to Venezuela with deep experience in complex political environments.",photo:"https://lh3.googleusercontent.com/d/1ot_DUF48iuCkiXY_1Y3abh5sCoWaYGO7",li:"#",bio:["A highly decorated career diplomat with deep experience in complex political environments. Jimmy served as U.S. Ambassador to Venezuela and Chargé d'Affaires to Angola and São Tomé and Príncipe, and held senior roles across Latin America, Africa, and the Caribbean, including Director of INL for the Western Hemisphere and Consul General in Rio de Janeiro. He is a Nonresident Senior Fellow at the Atlantic Council and a frequent contributor to MS Now, The New York Times, and Bloomberg."]},
+  {slug:"michael-groen",name:"Lt. Gen. Michael Groen",suffix:"USMC (Ret.)",role:"Partner",short:"A retired three-star general and combat veteran, former Director of the DoD's Joint Artificial Intelligence Center.",photo:"https://lh3.googleusercontent.com/d/1SPuCeHhI3zIdQ4XYVCiQVTL2q8GsXCi3",li:"#",bio:["A retired three-star general and combat veteran whose 36-year Marine Corps career spanned multiple tours and the highest levels of national security. He served as Director of the Department of Defense's Joint Artificial Intelligence Center, at the NSA, and as a Senior Advisor to the Chairman of the Joint Chiefs of Staff. With deep intelligence, cyber, and technology expertise, he advises several leading U.S. AI and data-science companies and is a Nonresident Senior Fellow at the Atlantic Council."]},
+  {slug:"david-kol",name:"David Kol",suffix:"",role:"Partner",short:"A serial entrepreneur with more than 20 years in capital markets, M&A, and executive management across resources, media, and technology.",photo:"https://lh3.googleusercontent.com/d/1ZBT94ZWUQdeIKvqtZUZn6vRtlPKql4eX",li:"#",bio:["A serial entrepreneur with more than 20 years of experience in capital markets, M&A, and executive management across the mineral resource, media and entertainment, and technology sectors. He is Founder and CEO of Zodiac Gold Inc. (TSXV: ZAU), a West Africa gold exploration company, and has held senior leadership roles at Global Media Group Holdings, Global Media Ventures, The Players Network, and Interactive Enterprises."]}
 ];
 /* Advisors — shown on the Team page only, not on the Home team preview */
 const ADVISORS=[
-  {slug:"robin-mcwatt",name:"Robin McWatt",suffix:"",role:"Sr. Advisor",short:"Corporate development executive with over a decade in capital markets and M&A advisory across natural resources, infrastructure, and technology.",photo:"https://lh3.googleusercontent.com/d/1jlYFMbKnbYWmmcT_JGL55QS-1fEWKZ74",li:"#",bio:["Robin McWatt is a seasoned corporate development executive with over a decade of experience in capital markets and M&A advisory across natural resources, infrastructure, manufacturing, technology, and real estate.","He began his career as a buy-side equity analyst with a Canadian institutional investment manager before serving as Vice President at a Toronto-based boutique investment bank.","He holds a B.A. in Economics and Finance from McGill University."]}
+  {slug:"robin-mcwatt",name:"Robin McWatt",suffix:"",role:"Senior Advisor",short:"A seasoned corporate development executive with over a decade in capital markets and M&A advisory across natural resources, infrastructure, and technology.",photo:"https://lh3.googleusercontent.com/d/1jlYFMbKnbYWmmcT_JGL55QS-1fEWKZ74",li:"#",bio:["A seasoned corporate development executive with over a decade of experience in capital markets and M&A advisory across natural resources, infrastructure, manufacturing, technology, and real estate. Robin began his career as a buy-side equity analyst with a Canadian institutional investment manager before serving as Vice President at a Toronto-based boutique investment bank. He holds a B.A. in Economics and Finance from McGill University."]}
 ];
 const NEWS=[
-  {cat:"Media",date:"MS NOW",src:"Broadcast Media",img:"https://lh3.googleusercontent.com/d/1vJCghb94TWx5AxjOqw_TvoDwpG61pRgj",t:"Opinion | The U.S. drone strike in Venezuela",x:"Ambassador James Story (Ambassador retired), Managing Partner at Global Frontier Advisors, published a new op-ed in MS NOW on the evolving U.S. approach to security in the Western Hemisphere."},
+  {cat:"Media",date:"MS NOW",src:"Broadcast Media",img:"https://lh3.googleusercontent.com/d/1vJCghb94TWx5AxjOqw_TvoDwpG61pRgj",t:"Opinion | The U.S. drone strike in Venezuela",x:"Ambassador James Story (Ret.), Partner at Global Frontier Advisors, published a new op-ed in MS NOW on the evolving U.S. approach to security in the Western Hemisphere."},
   {cat:"Media",date:"May 2026",src:"LinkedIn",img:"https://lh3.googleusercontent.com/d/1TanSoiuqwvt5nSnc66U8x1X9_ARv3FtT",t:"Lt. Gen. Bellon briefs CalPERS on Middle East geopolitical risk",x:"Partner Dave Bellon met with the CalPERS Board of Administration to discuss geopolitical risk and its implications for institutional capital allocation."},
   {cat:"Firm",date:"Jun 2026",src:"Karbon-K",img:"https://lh3.googleusercontent.com/d/1I77mW8FDsDS8lN1UYIt_EihjmXRHYoyI",t:"Evertrak and Karbon-X sign letter of intent on plastic waste reduction credits",x:"The agreement pairs Evertrak's recycled-plastic railroad ties with a Verra-aligned carbon credit initiative — an infrastructure-linked climate model the firm supports across its client relationships."},
   {cat:"Media",date:"May 2026",src:"News Interview",img:"Media — 1200&times;750",t:"Lt. Gen. Bellon on infrastructure resilience and interagency coordination",x:"Perspectives on the security dimensions of critical infrastructure in an era of strategic competition."},
@@ -890,9 +945,9 @@ const NEWS=[
 ];
 
 /* ============ RENDER ============ */
-const practiceCard=(p,i,arr)=>`<div class="pcard${i===arr.length-1?' last':''}" data-route="practice/${p.slug}"><span class="idx">${p.n}</span><h3>${p.t}</h3><p>${p.s}</p><span class="more">Learn more <span class="arw">&rarr;</span></span></div>`;
+const practiceCard=p=>`<div class="pcard" data-route="practice/${p.slug}"><span class="idx">${p.n}</span><h3>${p.t}</h3><p>${p.s}</p><span class="more">Learn more <span class="arw">&rarr;</span></span></div>`;
 const memberCard=(m,wide)=>`<div class="member${wide?' wide':''}"><div class="photo" style="--img:url('${m.photo}')"></div><div class="info"><div class="role">${m.role}</div><h3>${m.name}${m.suffix?` <span style="font-size:.62em;color:var(--gray);font-style:italic">${m.suffix}</span>`:''}</h3><p class="short">${m.short}</p><div class="actions"><a class="textlink" data-route="team/${m.slug}">Read full bio <span class="arw">&rarr;</span></a><a class="li" href="${m.li}" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4V21H3zM9 8.98h3.8v1.64h.05c.53-1 1.83-2.06 3.76-2.06C20.4 8.56 21 10.5 21 13.2V21h-4v-6.9c0-1.64-.03-3.75-2.29-3.75-2.3 0-2.65 1.79-2.65 3.63V21H9z"/></svg></a></div></div></div>`;
-const newsCard=a=>`<div class="nart" data-cat="${a.cat}"><div class="photo" style="--img:url('${a.img}')"></div><div class="nc"><div class="meta"><span>${a.cat}</span><span class="date">${a.date}</span></div><h3>${a.t}</h3><p>${a.x}</p><span class="src">${a.src}</span></div></div>`;const checkTick='<span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>';
+const newsCard=a=>`<div class="nart" data-cat="${a.cat}" onclick="alert('Mockup only — article links not wired. Each card will link to its source or a dedicated GFA News page on build.')"><div class="photo" style="--img:url('${a.img}')"></div><div class="nc"><div class="meta"><span>${a.cat}</span><span class="date">${a.date}</span></div><h3>${a.t}</h3><p>${a.x}</p><span class="src">${a.src}</span></div></div>`;const checkTick='<span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>';
 const paItem=p=>`<div class="pa-item" id="pa-${p.slug}"><div class="pa-head"><span class="num">${p.n}</span><h3>${p.t}</h3></div><div class="pa-body"><p class="d">${p.s}</p><ul class="caps">${p.caps.map(c=>{const parts=c.split(' — ');return parts.length>1?`<li>${checkTick}<span class="capbody"><b>${parts[0]}</b>${parts.slice(1).join(' — ')}</span></li>`:`<li>${checkTick}<span class="capbody">${c}</span></li>`;}).join('')}</ul></div></div>`;
 
 document.getElementById('homePractice').innerHTML=PRACTICES.map(practiceCard).join('');
@@ -903,7 +958,7 @@ document.getElementById('fullTeamAdvisors').innerHTML=ADVISORS.map(m=>memberCard
 document.getElementById('homeNews').innerHTML=NEWS.slice(0,3).map(newsCard).join('');
 document.getElementById('fullNews').innerHTML=NEWS.map(newsCard).join('');
 document.getElementById('practiceDetail').innerHTML=PRACTICES.map(paItem).join('');
-document.getElementById('ddPractice').innerHTML=PRACTICES.map(p=>`<a data-route="practice/${p.slug}">${p.t}</a>`).join('')+'<div class="ddsep"></div>'+`<a data-route="practice/sector-focus">Sector Focus</a><a data-route="practice/geo-reach">Geographic Reach</a>`;
+document.getElementById('ddPractice').innerHTML=PRACTICES.map(p=>`<a data-route="practice/${p.slug}">${p.t}</a>`).join('');
 
 const cats=['All',...[...new Set(NEWS.map(n=>n.cat))]];
 document.getElementById('newsFilters').innerHTML=cats.map((c,i)=>`<button class="${i===0?'active':''}" data-filter="${c}">${c}</button>`).join('');
